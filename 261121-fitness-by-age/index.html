@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const saved = localStorage.getItem('color-scheme');
+      if (saved === 'light' || saved === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = saved;
+      }
+    } catch {}
+  </script>
+  <title>Exercise by Age Explainer</title>
+  <meta name="description" content="An interactive visual guide to exercise by age: explore 7 overlapping age stages from 10 to 75+, see which exercise types matter most, and walk through specific exercises and how they improve your body.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..600&family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,400..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link visually-hidden">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="brand" aria-label="Exercise by Age Explainer Home">
+        <svg class="brand-mark" width="32" height="32" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="var(--night-bordeaux)"/>
+          <circle cx="32" cy="32" r="21" fill="none" stroke="var(--honey-bronze)" stroke-width="3.5"/>
+          <circle cx="32" cy="32" r="13" fill="none" stroke="var(--dark-slate-grey)" stroke-width="4"/>
+          <path d="M18 39 C24 22, 32 18, 46 25" fill="none" stroke="var(--vanilla-custard)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="46" cy="25" r="4.5" fill="var(--brown-red)" stroke="var(--vanilla-custard)" stroke-width="2"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Exercise by Age Explainer</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary">
+        <ul role="list" class="nav-list">
+          <li><a href="#stage-explorer">Age Stages</a></li>
+          <li><a href="#training-mix">Exercise Types</a></li>
+          <li><a href="#body-atlas">Exercises &amp; Body</a></li>
+          <li><a href="#lifespan-matrix">Lifespan Matrix</a></li>
+        </ul>
+      </nav>
+
+      <button type="button" id="theme-toggle" class="theme-toggle">
+        <span class="theme-option theme-to-dark">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="theme-label">Dark</span>
+          <span class="visually-hidden">Switch to dark theme</span>
+        </span>
+        <span class="theme-option theme-to-light">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="theme-label">Light</span>
+          <span class="visually-hidden">Switch to light theme</span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Editorial Masthead + Interactive Exact-Age Finder -->
+    <section class="masthead">
+      <div class="container masthead-grid">
+        <div class="masthead-copy">
+          <p class="eyebrow">An Illustrated Guide · Ages 10 to 75+</p>
+          <h1 id="main-content" tabindex="-1">Exercise by Age</h1>
+          <p class="lead">
+            The best workout changes as your physiology does. Banking bone density in adolescence, pushing peak HIIT in your twenties, and shifting toward sub-maximal strength and balance after 65 each unlock a different layer of lifelong resilience.
+          </p>
+        </div>
+
+        <aside class="age-finder-card" aria-labelledby="age-finder-heading">
+          <div class="age-finder-top">
+            <label for="age-slider" id="age-finder-heading" class="age-finder-label">
+              Explore by your exact age
+            </label>
+            <output for="age-slider" id="age-output" class="age-output">15 yrs</output>
+          </div>
+          <input
+            type="range"
+            id="age-slider"
+            class="age-slider"
+            min="10"
+            max="85"
+            value="15"
+            aria-describedby="age-match-summary"
+          >
+          <div class="age-scale" aria-hidden="true">
+            <span>10</span>
+            <span>25</span>
+            <span>40</span>
+            <span>55</span>
+            <span>70</span>
+            <span>85+</span>
+          </div>
+          <div id="age-match-summary" class="age-match-summary">
+            Age <strong>15</strong> fits 1 age stage:
+          </div>
+          <div id="age-match-chips" class="age-match-chips" aria-label="Matching overlapping age stages"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 7-Stage Overlapping Lifespan Selector -->
+    <section id="stage-explorer" class="stage-nav-band">
+      <div class="container">
+        <div class="stage-tablist-wrap">
+          <div
+            id="stage-tablist"
+            class="stage-tablist scroller"
+            role="tablist"
+            focusgroup="tablist nomemory"
+            aria-label="Choose an age group"
+          >
+            <button type="button" role="tab" id="tab-10-18" class="stage-tab" data-stage="10-18" aria-selected="true" focusgroupstart>
+              <span class="stage-tab-range">10–18</span>
+              <span class="stage-tab-name">Adolescent</span>
+            </button>
+            <button type="button" role="tab" id="tab-17-28" class="stage-tab" data-stage="17-28" aria-selected="false">
+              <span class="stage-tab-range">17–28</span>
+              <span class="stage-tab-name">Athletic Prime</span>
+            </button>
+            <button type="button" role="tab" id="tab-25-39" class="stage-tab" data-stage="25-39" aria-selected="false">
+              <span class="stage-tab-range">25–39</span>
+              <span class="stage-tab-name">Metabolic</span>
+            </button>
+            <button type="button" role="tab" id="tab-38-52" class="stage-tab" data-stage="38-52" aria-selected="false">
+              <span class="stage-tab-range">38–52</span>
+              <span class="stage-tab-name">Longevity Pivot</span>
+            </button>
+            <button type="button" role="tab" id="tab-50-65" class="stage-tab" data-stage="50-65" aria-selected="false">
+              <span class="stage-tab-range">50–65</span>
+              <span class="stage-tab-name">Bone &amp; Power</span>
+            </button>
+            <button type="button" role="tab" id="tab-63-75" class="stage-tab" data-stage="63-75" aria-selected="false">
+              <span class="stage-tab-range">63–75</span>
+              <span class="stage-tab-name">Independence</span>
+            </button>
+            <button type="button" role="tab" id="tab-75-plus" class="stage-tab" data-stage="75-plus" aria-selected="false">
+              <span class="stage-tab-range">75+</span>
+              <span class="stage-tab-name">Graceful Mobility</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Stage Tabpanel -->
+    <div id="stage-panel" role="tabpanel" aria-labelledby="tab-10-18">
+      <!-- Stage Editorial Hero -->
+      <section class="stage-hero">
+        <div class="container stage-hero-grid">
+          <div class="stage-hero-copy">
+            <p id="stage-eyebrow" class="eyebrow">Stage 01 · Ages 10 to 18</p>
+            <h2 id="stage-title" class="stage-title">Adolescent Foundations</h2>
+            <p id="stage-tagline" class="stage-tagline">Bank peak bone density and wire lifelong movement fluency.</p>
+            <p id="stage-overview" class="stage-overview">
+              Nearly 90% of adult bone mineral density is built before age 20. Rapid limb growth can temporarily disrupt coordination, making skill mastery, playful impact landings, and bodyweight control far more valuable than chasing heavy max lifts.
+            </p>
+
+            <dl class="stage-meta-strip">
+              <div class="stage-meta-item">
+                <dt>Weekly Rhythm</dt>
+                <dd id="stage-rhythm">60 min daily active play/sport · 2–3×/wk movement &amp; bodyweight strength</dd>
+              </div>
+              <div class="stage-meta-item">
+                <dt>Effort Target</dt>
+                <dd id="stage-effort">RPE 5–7 · Technique First</dd>
+              </div>
+            </dl>
+
+            <div class="guidance-duo">
+              <div class="guidance-box guidance-focus">
+                <h3>
+                  <span class="guidance-glyph" aria-hidden="true">●</span>
+                  What to Emphasize
+                </h3>
+                <ul id="stage-focus-list" class="guidance-list"></ul>
+              </div>
+              <div class="guidance-box guidance-guardrails">
+                <h3>
+                  <span class="guidance-glyph" aria-hidden="true">△</span>
+                  Smart Guardrails
+                </h3>
+                <ul id="stage-guardrail-list" class="guidance-list"></ul>
+              </div>
+            </div>
+          </div>
+
+          <figure class="stage-poster-frame">
+            <picture id="stage-picture">
+              <source
+                id="stage-source-webp"
+                type="image/webp"
+                srcset="assets/images/group-10-18-640.webp 640w, assets/images/group-10-18.webp 1280w"
+                sizes="(max-width: 900px) 100vw, 48vw"
+              >
+              <img
+                id="stage-image"
+                src="assets/images/group-10-18.jpg"
+                alt="Editorial illustration of two adolescents practicing athletic hop landings and single-leg squat balance framed by concentric rings"
+                width="1280"
+                height="720"
+                fetchpriority="high"
+                decoding="async"
+              >
+            </picture>
+            <figcaption id="stage-caption" class="poster-caption">
+              Plate 01 · Adolescent Foundations (10–18)
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Section A: Exercise Types Training Mix -->
+      <section id="training-mix" class="section-block mix-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Step 01 · Exercise Types</p>
+              <h2 class="section-title">Recommended Training Mix for <span id="mix-stage-label">Ages 10–18</span></h2>
+            </div>
+            <p class="section-lead">
+              Every modality plays a distinct physiological role. Select any exercise type below to filter its specific exercises.
+            </p>
+          </div>
+
+          <div id="mix-grid" class="mix-grid" role="list"></div>
+        </div>
+      </section>
+
+      <!-- Section B: Specific Exercises + Interactive Anatomical Body Atlas -->
+      <section id="body-atlas" class="section-block atlas-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Step 02 · Specific Exercises &amp; Physiology</p>
+              <h2 class="section-title">Exercises &amp; How They Improve Your Body</h2>
+            </div>
+            <p class="section-lead">
+              Hover or focus any exercise to light up its target systems on the anatomical atlas, or open the interactive walkthrough for step-by-step visuals.
+            </p>
+          </div>
+
+          <div id="modality-filters" class="filter-bar" role="group" aria-label="Filter exercises by type"></div>
+
+          <div class="atlas-layout">
+            <div class="exercise-column">
+              <div id="exercise-grid" class="exercise-grid"></div>
+              <div id="exercise-empty" class="empty-state" hidden>
+                <p id="empty-message"></p>
+                <button type="button" id="reset-filter-btn" class="btn btn-secondary">Show all exercises for this age group</button>
+              </div>
+            </div>
+
+            <aside class="anatomy-column" aria-labelledby="anatomy-panel-title">
+              <div class="anatomy-card">
+                <div class="anatomy-card-head">
+                  <div>
+                    <p id="anatomy-kicker" class="anatomy-kicker">Full Stage Body Impact</p>
+                    <h3 id="anatomy-panel-title" class="anatomy-title">Adolescent Foundations</h3>
+                  </div>
+                  <button type="button" id="anatomy-reset-btn" class="text-btn" hidden>
+                    View Stage Overview
+                  </button>
+                </div>
+
+                <div id="anatomy-svg-host" class="anatomy-svg-host"></div>
+
+                <div class="system-legend" aria-label="Body systems legend">
+                  <div class="legend-chip" data-sys="muscular">
+                    <span class="swatch swatch-muscular" aria-hidden="true"></span>
+                    <span>Muscles</span>
+                  </div>
+                  <div class="legend-chip" data-sys="skeletal">
+                    <span class="swatch swatch-skeletal" aria-hidden="true"></span>
+                    <span>Bones</span>
+                  </div>
+                  <div class="legend-chip" data-sys="cardiovascular">
+                    <span class="swatch swatch-cardio" aria-hidden="true"></span>
+                    <span>Heart &amp; Lungs</span>
+                  </div>
+                  <div class="legend-chip" data-sys="neuromuscular">
+                    <span class="swatch swatch-neural" aria-hidden="true"></span>
+                    <span>Balance / Neural</span>
+                  </div>
+                </div>
+
+                <div id="anatomy-readout" class="anatomy-readout">
+                  <p id="anatomy-headline" class="anatomy-headline"></p>
+                  <ul id="anatomy-mechanisms" class="anatomy-mechanisms"></ul>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Section C: Full Lifespan Comparison Matrix -->
+    <section id="lifespan-matrix" class="section-block matrix-section">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Big Picture · Ages 10 to 75+</p>
+            <h2 class="section-title">How Exercise Priorities Shift Over a Lifetime</h2>
+          </div>
+          <p class="section-lead">
+            Notice how aerobic base and strength stay essential across every decade—while HIIT peaks in athletic prime and balance rises to a daily cornerstone at 63+.
+          </p>
+        </div>
+
+        <div class="matrix-legend" aria-label="Priority legend">
+          <span><strong class="sym-core" aria-hidden="true">●</strong> Core Pillar</span>
+          <span><strong class="sym-high" aria-hidden="true">◉</strong> High Priority</span>
+          <span><strong class="sym-moderate" aria-hidden="true">◐</strong> Supportive</span>
+          <span><strong class="sym-adapt" aria-hidden="true">△</strong> Adapt / Low-Impact</span>
+          <span><strong class="sym-caution" aria-hidden="true">○</strong> Skip or Substitute</span>
+        </div>
+
+        <div class="matrix-scroll" tabindex="0" role="region" aria-label="Lifespan exercise modality comparison table">
+          <table class="lifespan-table">
+            <caption class="visually-hidden">Comparison of 6 exercise modalities across 7 overlapping age stages from 10–18 to 75+</caption>
+            <thead>
+              <tr id="matrix-head-row">
+                <th scope="col">Exercise Modality</th>
+              </tr>
+            </thead>
+            <tbody id="matrix-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <div id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-note">
+        <p class="footer-title">Exercise by Age Explainer</p>
+        <p class="disclaimer">
+          <strong>Educational Reference Only:</strong> Training progressions align with general ACSM and WHO physical activity guidelines across the lifespan. Individual needs vary—consult a qualified healthcare provider or physical therapist before starting vigorous intervals, heavy lifting, or new routines if you have cardiovascular, bone, or joint conditions.
+        </p>
+      </div>
+      <div class="palette-mark" role="img" aria-label="Five-color palette: dark slate grey, vanilla custard, honey bronze, brown red, and night bordeaux">
+        <span class="palette-dot" style="--swatch: var(--dark-slate-grey)" aria-hidden="true"></span>
+        <span class="palette-dot" style="--swatch: var(--vanilla-custard)" aria-hidden="true"></span>
+        <span class="palette-dot" style="--swatch: var(--honey-bronze)" aria-hidden="true"></span>
+        <span class="palette-dot" style="--swatch: var(--brown-red)" aria-hidden="true"></span>
+        <span class="palette-dot" style="--swatch: var(--night-bordeaux)" aria-hidden="true"></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Exercise Walkthrough Modal (Native <dialog> with light-dismiss & top-layer transitions) -->
+  <dialog id="exercise-dialog" class="exercise-dialog" closedby="any" aria-labelledby="dialog-title">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <div class="dialog-header-meta">
+          <span id="dialog-modality-pill" class="modality-pill"></span>
+          <span id="dialog-stage-pill" class="stage-pill"></span>
+        </div>
+        <div class="dialog-title-row">
+          <h2 id="dialog-title" class="dialog-title">Exercise Name</h2>
+          <button type="button" id="dialog-close" class="icon-close-btn" aria-label="Close exercise walkthrough">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="dialog-body">
+        <!-- Left Studio Column: Biomechanical Stepper + Anatomical Body Impact -->
+        <div class="dialog-visuals">
+          <div class="studio-card">
+            <div class="studio-card-head">
+              <h3 class="studio-heading">Biomechanical Walkthrough</h3>
+              <button type="button" id="phase-play-btn" class="play-toggle-btn">
+                <span id="phase-play-icon" aria-hidden="true">▶</span>
+                <span id="phase-play-label">Play Motion</span>
+              </button>
+            </div>
+
+            <div id="dialog-movement-host" class="movement-stage"></div>
+
+            <div id="phase-controls" class="phase-controls" role="group" aria-label="Select movement phase">
+              <button type="button" class="phase-btn" data-phase="0" aria-pressed="true">1 · Setup</button>
+              <button type="button" class="phase-btn" data-phase="1" aria-pressed="false">2 · Action</button>
+              <button type="button" class="phase-btn" data-phase="2" aria-pressed="false">3 · Finish</button>
+            </div>
+            <p id="phase-active-cue" class="phase-active-cue"></p>
+          </div>
+
+          <div class="studio-card studio-anatomy-card">
+            <div class="studio-card-head">
+              <h3 class="studio-heading">Active Body Systems</h3>
+              <span id="dialog-zone-count" class="zone-count"></span>
+            </div>
+            <div class="dialog-anatomy-split">
+              <div id="dialog-anatomy-host" class="dialog-anatomy-svg"></div>
+              <ul id="dialog-zone-tags" class="zone-tag-list"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Coaching Column -->
+        <div class="dialog-details">
+          <dl class="dosage-bar">
+            <div>
+              <dt>Effort &amp; Dosage</dt>
+              <dd id="dialog-effort"></dd>
+            </div>
+            <div>
+              <dt>Weekly Rhythm</dt>
+              <dd id="dialog-frequency"></dd>
+            </div>
+          </dl>
+
+          <section class="detail-callout">
+            <h3>Why This Fits <span id="dialog-why-age-label"></span></h3>
+            <p id="dialog-why-text"></p>
+          </section>
+
+          <section class="detail-block">
+            <h3>How It Improves Your Body</h3>
+            <p id="dialog-impact-headline" class="impact-headline"></p>
+            <ul id="dialog-mechanisms" class="mechanism-list"></ul>
+          </section>
+
+          <section class="detail-block">
+            <h3>Step-by-Step Cues</h3>
+            <ol id="dialog-steps" class="step-list"></ol>
+          </section>
+
+          <section class="scaling-grid" aria-label="Scaling options">
+            <div class="scale-card scale-easier">
+              <h3>Make It Easier</h3>
+              <p id="dialog-easier"></p>
+            </div>
+            <div class="scale-card scale-harder">
+              <h3>Progress Harder</h3>
+              <p id="dialog-harder"></p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="dialog-footer">
+        <button type="button" id="dialog-prev" class="btn btn-secondary">← Previous Exercise</button>
+        <span id="dialog-counter" class="dialog-counter">1 of 6</span>
+        <button type="button" id="dialog-next" class="btn btn-primary">Next Exercise →</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

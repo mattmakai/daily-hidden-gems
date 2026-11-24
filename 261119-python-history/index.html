@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Python Programming Language's Journey... So Far</title>
+  <meta name="description" content="An interactive visual history of the Python programming language: its syntax, standard library and the PEPs that shaped them, from 1989 to the changes scheduled for 2027–2028.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#306998">
+  <meta property="og:title" content="The Python Programming Language's Journey... So Far">
+  <meta property="og:description" content="An interactive timeline of how Python evolved: releases, features and PEPs from 1989 to today, and what's scheduled next.">
+  <meta property="og:type" content="website">
+  <script>
+    // Apply the saved theme before first paint to avoid a flash of the wrong theme.
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("pyjourney-theme"); } catch (e) {}
+      var root = document.documentElement;
+      if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved);
+      var dark = saved ? saved === "dark" : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      root.setAttribute("data-theme-effective", dark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=JetBrains+Mono:wght@400;600&display=swap">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip" href="#timeline">Skip to the timeline</a>
+
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Back to top"><span class="brand-mark" aria-hidden="true">&gt;&gt;&gt;</span><span class="brand-text">Python's journey</span></a>
+      <nav class="topnav" aria-label="Sections">
+        <a href="#timeline">Timeline</a>
+        <a href="#py3">Python 2 → 3</a>
+        <a href="#peps">PEPs</a>
+        <a href="#ahead">What's next</a>
+      </nav>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>The Python Programming Language's Journey<span class="ellipsis" aria-hidden="true">...</span><span class="visually-hidden">...</span> So Far</h1>
+          <p class="lede">How Python's syntax, standard library and design process changed, release by release: from Guido van Rossum's holiday project in 1989 to the changes already scheduled for 2027 and 2028.</p>
+          <ul class="hero-links">
+            <li><a class="primary" href="#timeline">Explore the timeline</a></li>
+            <li><a href="#py3">What Python 3 changed</a></li>
+            <li><a href="#ahead">What's next</a></li>
+          </ul>
+        </div>
+        <figure class="repl" aria-label="The same greeting written in four eras of Python">
+          <div class="repl-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+          <ol id="repl-lines"></ol>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="timeline" aria-labelledby="timeline-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="timeline-title">Timeline</h2>
+          <p>Each row follows one part of the language across 37 years. Circles are releases, diamonds are milestones such as key PEPs, and bigger marks mean more changes. Select a mark or a version to see what changed, or select a row's name to follow that thread through time.</p>
+        </div>
+
+        <div class="controls">
+          <fieldset class="lane-filters">
+            <legend>Show categories</legend>
+            <div class="chips" id="lane-chips"></div>
+          </fieldset>
+          <div class="search">
+            <label for="search">Search features and PEPs</label>
+            <input id="search" type="search" autocomplete="off" placeholder="Try “walrus”, “asyncio” or “PEP 484”">
+          </div>
+        </div>
+        <div class="search-results" id="search-results" hidden></div>
+
+        <div class="chart" id="chart">
+          <div class="chart-labels" id="chart-labels"></div>
+          <div class="chart-scroll" id="chart-scroll"></div>
+        </div>
+        <ul class="legend" aria-label="Legend">
+          <li><span class="sw early" aria-hidden="true"></span>Python 0.9–1.6</li>
+          <li><span class="sw py2" aria-hidden="true"></span>Python 2</li>
+          <li><span class="sw py3" aria-hidden="true"></span>Python 3</li>
+          <li><span class="sw next" aria-hidden="true"></span>Scheduled or expected</li>
+          <li><span class="sw hollow diamond" aria-hidden="true"></span>Milestone (not a release)</li>
+        </ul>
+
+        <nav class="strip" aria-label="Releases and milestones">
+          <button class="strip-step" id="strip-prev" type="button" aria-label="Previous release">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <ul class="strip-list" id="strip"></ul>
+          <button class="strip-step" id="strip-next" type="button" aria-label="Next release">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </nav>
+
+        <article class="detail" id="detail" aria-live="polite" tabindex="-1"></article>
+        <noscript><p>The interactive timeline needs JavaScript. The Python 2 → 3, PEP and What's next sections below work without it.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section" id="py3" aria-labelledby="py3-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="py3-title">Python 2 → 3: what actually changed</h2>
+          <p>Python 3.0 was the only release ever designed to break existing code. The goal was to fix mistakes that couldn't be fixed compatibly, above all the confusion between text and bytes. It worked, but moving the ecosystem over took almost twelve years.</p>
+        </div>
+        <div class="py3-layout">
+          <aside class="py3-aside" aria-labelledby="migration-title">
+            <h3 id="migration-title">The long migration</h3>
+            <ol class="migration" id="migration"></ol>
+            <div class="note" id="migration-note"></div>
+          </aside>
+          <ol class="changes" id="changes"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="peps" aria-labelledby="peps-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="peps-title">How Python changes: the PEP process</h2>
+          <p>Almost every change on this page started as a PEP, a Python Enhancement Proposal. A PEP is a design document that explains a change's motivation, specifies it precisely and records the alternatives that were considered. It is debated publicly (today on discuss.python.org) and then accepted or rejected.</p>
+        </div>
+        <div class="pep-grid">
+          <div>
+            <h3>The life of a Standards Track PEP</h3>
+            <div class="flow" role="img" aria-label="PEP statuses: Draft, then Accepted, then Final. A draft can instead end as Rejected, Deferred or Withdrawn; a final PEP can later be Superseded.">
+              <div class="flow-row">
+                <span class="flow-state">Draft</span>
+                <svg class="flow-arrow" viewBox="0 0 22 14" aria-hidden="true"><path d="M1 7h18M14 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <span class="flow-state">Accepted</span>
+                <svg class="flow-arrow" viewBox="0 0 22 14" aria-hidden="true"><path d="M1 7h18M14 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+                <span class="flow-state final">Final</span>
+              </div>
+              <div class="flow-branch">
+                Or a draft stops here:
+                <div class="flow-row">
+                  <span class="flow-state side">Rejected</span>
+                  <span class="flow-state side">Deferred</span>
+                  <span class="flow-state side">Withdrawn</span>
+                </div>
+              </div>
+              <div class="flow-branch">
+                Later, a final PEP may be replaced:
+                <div class="flow-row"><span class="flow-state side">Superseded</span></div>
+              </div>
+            </div>
+            <div class="prose" style="margin-top: 28px">
+              <h3 style="margin-bottom: 10px">Who decides</h3>
+              <p>Until July 2018, Guido van Rossum had the final word as Python's “Benevolent Dictator For Life” (BDFL), often delegating individual PEPs to trusted core developers. Since 2019, a five-person Steering Council elected by the core developers has decided (PEP 13). It usually appoints a PEP-Delegate for specialist areas such as typing or packaging.</p>
+              <p>“Accepted” means the design is approved. A PEP becomes “Final” only once it ships, which is why this site's look-ahead marks accepted-but-unreleased PEPs separately.</p>
+            </div>
+          </div>
+          <div>
+            <h3 style="margin-bottom: 10px">PEPs about the process itself</h3>
+            <ul class="pep-list">
+              <li><span class="num"><a href="https://peps.python.org/pep-0001/">PEP 1</a></span><p><strong>PEP purpose and guidelines.</strong> Defines what a PEP is, the three types (Standards Track, Informational, Process) and the statuses above. Written in 2000.</p></li>
+              <li><span class="num"><a href="https://peps.python.org/pep-0008/">PEP 8</a></span><p><strong>Style guide for Python code.</strong> Four-space indents, naming conventions and line length. Linters and formatters still enforce it.</p></li>
+              <li><span class="num"><a href="https://peps.python.org/pep-0020/">PEP 20</a></span><p><strong>The Zen of Python.</strong> The design philosophy in 19 lines. Run <code>import this</code> to read it.</p></li>
+              <li><span class="num"><a href="https://peps.python.org/pep-0013/">PEP 13</a></span><p><strong>Python language governance.</strong> How the Steering Council is elected and what it decides, adopted after PEP 8016 won the 2018 governance vote.</p></li>
+              <li><span class="num"><a href="https://peps.python.org/pep-0387/">PEP 387</a></span><p><strong>Backwards compatibility policy.</strong> Normally a feature must be deprecated with warnings for at least two releases before it can be removed. This is why removals in the look-ahead are known years in advance.</p></li>
+              <li><span class="num"><a href="https://peps.python.org/pep-0602/">PEP 602</a></span><p><strong>Annual release cycle.</strong> A new feature release every October since 3.9, each supported for five years.</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ahead" aria-labelledby="ahead-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="ahead-title">What's next: 2027 and 2028</h2>
+          <p>Only what is scheduled, accepted or already in development builds is listed here, and each item is labeled with how certain it is. Python's release calendar and deprecation policy make much of the next two years predictable.</p>
+        </div>
+
+        <div class="lifecycle-wrap">
+          <h3>Supported versions</h3>
+          <p>Each release gets two years of bug fixes and then three years of security-only fixes (18 months of bug fixes before 3.13).</p>
+          <div class="lifecycle-scroll" id="lifecycle"></div>
+          <ul class="lc-legend">
+            <li><span class="sw bugfix" aria-hidden="true"></span>Bug fixes</li>
+            <li><span class="sw security" aria-hidden="true"></span>Security fixes only</li>
+            <li><span class="sw planned" aria-hidden="true"></span>Not yet released</li>
+          </ul>
+        </div>
+
+        <div class="ahead-grid" id="ahead-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <h2>Sources</h2>
+        <p>Release details come from the official “What's New” documents, the PEP index, the CPython release history and the Python developer guide. Look-ahead items were checked on <time id="verified-date" datetime="2026-11-19">19 November 2026</time>.</p>
+        <ul>
+          <li><a href="https://docs.python.org/3/whatsnew/index.html">What's New in Python</a></li>
+          <li><a href="https://peps.python.org/">PEP index</a></li>
+          <li><a href="https://devguide.python.org/versions/">Status of Python versions</a></li>
+          <li><a href="https://docs.python.org/3/deprecations/index.html">Deprecations and pending removals</a></li>
+          <li><a href="https://python-history.blogspot.com/">The History of Python, by Guido van Rossum</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>About</h2>
+        <p>An independent explainer, not affiliated with the Python Software Foundation. “Python” is a registered trademark of the PSF.</p>
+        <p>Found a mistake? All the content lives in a single data file, so corrections are easy to make.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gulliver's Travels, Explained</title>
+<meta name="description" content="A visual guide to Jonathan Swift's Gulliver's Travels: the four voyages, how they connect, and 30 questions to test what you remember.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======================= NAV ======================= -->
+<nav class="topnav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Gulliver's Travels</a>
+    <div class="navlinks">
+      <a href="#gulliver">Gulliver</a>
+      <a href="#map">Map &amp; Timeline</a>
+      <a href="#part1">I · Lilliput</a>
+      <a href="#part2">II · Brobdingnag</a>
+      <a href="#part3">III · Laputa</a>
+      <a href="#part4">IV · Houyhnhnms</a>
+      <a href="#connections">Connections</a>
+    </div>
+    <a class="scorepill" href="#score" id="scorepill">Score 0/30</a>
+  </div>
+  <div class="progressbar"><span id="progressbar"></span></div>
+</nav>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Jonathan Swift · 1726 · A visual guide</div>
+      <h1>Gulliver's <em>Travels</em>, explained</h1>
+      <p class="lede">Four voyages, four very strange countries, and one ship's doctor whose view of the human race changes completely along the way. This guide walks through each story, shows how they fit together, and quizzes you as you go.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#gulliver">Start the voyage ↓</a>
+        <a class="btn ghost" href="#connections">How it all connects</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <!-- Ship on waves with compass rose -->
+      <svg viewBox="0 0 520 360" role="img">
+        <defs>
+          <linearGradient id="sail" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#f4f6ee"/>
+            <stop offset="1" stop-color="#b5ca8d"/>
+          </linearGradient>
+        </defs>
+        <!-- compass rose -->
+        <g transform="translate(400 90)" opacity=".55">
+          <circle r="62" fill="none" stroke="#b5ca8d" stroke-width="1.5"/>
+          <circle r="48" fill="none" stroke="#b5ca8d" stroke-width=".8" stroke-dasharray="2 4"/>
+          <path d="M0-70 L9 0 L0 70 L-9 0Z" fill="#b5ca8d"/>
+          <path d="M-70 0 L0 9 L70 0 L0 -9Z" fill="#8bb174"/>
+          <path d="M-40-40 L5-5 L40 40 L-5 5Z" fill="#426b69" opacity=".8"/>
+          <path d="M40-40 L5 5 L-40 40 L-5-5Z" fill="#426b69" opacity=".8"/>
+          <text y="-76" text-anchor="middle" fill="#b5ca8d" font-family="Inter" font-size="13" font-weight="700">N</text>
+        </g>
+        <!-- ship -->
+        <g transform="translate(120 70)">
+          <path d="M40 210 L280 210 L250 250 L70 250 Z" fill="#222e50"/>
+          <path d="M60 218 L265 218" stroke="#b5ca8d" stroke-width="2"/>
+          <rect x="155" y="20" width="6" height="192" fill="#222e50"/>
+          <rect x="95" y="60" width="5" height="152" fill="#222e50"/>
+          <rect x="215" y="70" width="5" height="142" fill="#222e50"/>
+          <path d="M163 30 Q215 70 163 120 Z" fill="url(#sail)"/>
+          <path d="M163 128 Q225 160 163 200 Z" fill="url(#sail)"/>
+          <path d="M102 70 Q145 100 102 135 Z" fill="url(#sail)"/>
+          <path d="M102 142 Q150 170 102 202 Z" fill="url(#sail)"/>
+          <path d="M222 82 Q255 110 222 140 Z" fill="url(#sail)"/>
+          <path d="M222 148 Q262 175 222 202 Z" fill="url(#sail)"/>
+          <path d="M158 20 L158 4 L182 10 L158 16" fill="#8bb174"/>
+          <path d="M280 210 L330 190" stroke="#222e50" stroke-width="4"/>
+        </g>
+        <!-- waves -->
+        <path d="M0 300 Q40 285 80 300 T160 300 T240 300 T320 300 T400 300 T480 300 T560 300 V360 H0Z" fill="#426b69"/>
+        <path d="M0 318 Q40 304 80 318 T160 318 T240 318 T320 318 T400 318 T480 318 T560 318 V360 H0Z" fill="#2a4849"/>
+        <path d="M0 336 Q40 324 80 336 T160 336 T240 336 T320 336 T400 336 T480 336 T560 336 V360 H0Z" fill="#222e50"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="voyage-strip">
+      <a href="#part1">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="22" width="40" height="10" rx="5" fill="#b5ca8d"/><circle cx="8" cy="20" r="6" fill="#b5ca8d"/><g fill="#8bb174"><circle cx="18" cy="38" r="2"/><rect x="17" y="40" width="2" height="5"/><circle cx="28" cy="38" r="2"/><rect x="27" y="40" width="2" height="5"/><circle cx="38" cy="38" r="2"/><rect x="37" y="40" width="2" height="5"/></g><path d="M12 20 L40 34 M20 20 L44 30 M30 20 L44 25" stroke="#222e50" stroke-width="1"/></svg>
+        <span class="num">Part I · 1699–1702</span>
+        <span class="name">Lilliput</span>
+        <span class="hook">Gulliver is a giant among people six inches tall.</span>
+      </a>
+      <a href="#part2">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 44 C6 30 10 22 18 20 L18 6 C18 3 23 3 23 6 L23 18 L25 4 C25 1 30 1 30 4 L29 18 L32 7 C32 4 37 4 37 7 L34 22 L40 16 C42 14 45 17 43 19 L34 32 C30 40 24 44 14 44Z" fill="#b5ca8d"/><g fill="#222e50"><circle cx="24" cy="28" r="1.8"/><rect x="23" y="30" width="2" height="5"/></g></svg>
+        <span class="num">Part II · 1702–1706</span>
+        <span class="name">Brobdingnag</span>
+        <span class="hook">Now he is the tiny one, in a land of giants.</span>
+      </a>
+      <a href="#part3">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="18" rx="18" ry="5" fill="#b5ca8d"/><path d="M6 18 Q24 36 42 18" fill="#8bb174"/><rect x="21" y="8" width="6" height="8" fill="#b5ca8d"/><path d="M4 44 H44" stroke="#8bb174" stroke-width="3"/><path d="M24 30 V40" stroke="#b5ca8d" stroke-dasharray="2 2"/></svg>
+        <span class="num">Part III · 1706–1710</span>
+        <span class="name">Laputa &amp; more</span>
+        <span class="hook">A flying island of thinkers who can't think straight.</span>
+      </a>
+      <a href="#part4">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 44 L16 30 C10 26 10 18 16 14 L20 6 L24 12 C32 12 40 18 40 26 L42 34 C42 38 38 38 37 35 L34 28 L30 30 L30 44Z" fill="#b5ca8d"/><circle cx="20" cy="18" r="1.6" fill="#222e50"/><path d="M24 12 C28 16 30 22 30 30" stroke="#8bb174" stroke-width="2" fill="none"/></svg>
+        <span class="num">Part IV · 1710–1715</span>
+        <span class="name">Houyhnhnms</span>
+        <span class="hook">Wise horses rule, and humans are the beasts.</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= MEET GULLIVER ======================= -->
+<section class="block" id="gulliver">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="prose">
+        <div class="eyebrow">Before the voyages</div>
+        <h2>Meet Lemuel Gulliver</h2>
+        <p class="lede">The whole book is told by Gulliver himself, as if it were a true travel diary. That's part of the joke.</p>
+        <p>Gulliver grew up in <b>Nottinghamshire</b>, studied at Emmanuel College in Cambridge, and trained as a <b>surgeon</b> in London. He marries Mary Burton, but his medical practice struggles, so he keeps going back to sea as a ship's doctor.</p>
+        <p>He is honest, curious, a quick learner of languages and very proud of England. Hold on to that last part. The book is really about what happens to that pride.</p>
+        <div class="callout">
+          <strong>The key idea: satire</strong>
+          Jonathan Swift was an Irish clergyman and political writer. He invented these lands so he could make fun of real things: English and European politics, pointless wars, scientists with silly schemes, and human pride itself. Every country Gulliver visits is a kind of <b>mirror</b> held up to us.
+        </div>
+      </div>
+      <figure class="figure">
+        <svg viewBox="0 0 420 330" role="img" aria-labelledby="g-fig-t">
+          <title id="g-fig-t">Gulliver's character traits at the start of the book</title>
+          <!-- Gulliver portrait -->
+          <g transform="translate(120 30)">
+            <ellipse cx="90" cy="285" rx="80" ry="10" fill="#222e50" opacity=".08"/>
+            <path d="M40 280 L48 170 L132 170 L140 280Z" fill="#222e50"/>
+            <path d="M48 170 Q90 150 132 170 L128 205 Q90 190 52 205Z" fill="#2a4849"/>
+            <path d="M80 160 L100 160 L96 182 L84 182Z" fill="#f4f6ee"/>
+            <circle cx="90" cy="120" r="38" fill="#e9dcc6"/>
+            <path d="M52 112 Q56 74 90 74 Q124 74 128 112 Q120 92 90 92 Q60 92 52 112Z" fill="#8a7a63"/>
+            <path d="M48 110 Q40 140 54 160 L60 120Z M132 110 Q140 140 126 160 L120 120Z" fill="#8a7a63"/>
+            <path d="M44 86 Q90 40 136 86 L120 90 Q90 70 60 90Z" fill="#222e50"/>
+            <circle cx="76" cy="122" r="3.5" fill="#222e50"/><circle cx="104" cy="122" r="3.5" fill="#222e50"/>
+            <path d="M80 140 Q90 147 100 140" stroke="#222e50" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <rect x="60" y="210" width="26" height="34" rx="3" fill="#8bb174"/><path d="M73 214 V240 M63 227 H83" stroke="#f4f6ee" stroke-width="3"/>
+          </g>
+          <!-- labels -->
+          <g font-family="Inter" font-size="13" fill="#222e50">
+            <g><rect x="4" y="40" width="130" height="44" rx="10" fill="#e8eedb"/><text x="20" y="58" font-weight="700">Ship's surgeon</text><text x="20" y="75" fill="#4b5670" font-size="11.5">his trade</text></g>
+            <g><rect x="4" y="150" width="130" height="44" rx="10" fill="#e8eedb"/><text x="20" y="168" font-weight="700">Gifted linguist</text><text x="20" y="185" fill="#4b5670" font-size="11.5">learns every language</text></g>
+            <g><rect x="286" y="40" width="130" height="44" rx="10" fill="#e8eedb"/><text x="298" y="58" font-weight="700">Curious</text><text x="298" y="75" fill="#4b5670" font-size="11.5">notes every detail</text></g>
+            <g><rect x="286" y="150" width="130" height="44" rx="10" fill="#b5ca8d"/><text x="298" y="168" font-weight="700">Proud Englishman</text><text x="298" y="185" fill="#2a4849" font-size="11.5">watch this change!</text></g>
+            <g><rect x="152" y="290" width="118" height="34" rx="10" fill="#e8eedb"/><text x="211" y="312" text-anchor="middle" font-weight="700">Narrator</text></g>
+          </g>
+        </svg>
+        <figcaption>Gulliver at the start: practical, observant, and sure that England is the best country in the world.</figcaption>
+      </figure>
+    </div>
+
+    <div class="quiz-block" data-section="intro"></div>
+  </div>
+</section>
+
+<!-- ======================= MAP & TIMELINE ======================= -->
+<section class="block dark" id="map">
+  <div class="wrap">
+    <div class="section-head prose">
+      <div class="eyebrow">Where and when</div>
+      <h2>The map of imaginary lands</h2>
+      <p class="lede">Swift put his made-up countries in parts of the world Europeans hadn't mapped yet, around the Indian and Pacific Oceans. Tap a pin to see what's there.</p>
+    </div>
+
+    <div class="map-wrap">
+      <figure>
+        <svg class="map-svg" id="map-svg" viewBox="0 0 1000 600" role="img" aria-labelledby="map-t">
+          <title id="map-t">Rough sea chart showing real places and Gulliver's imaginary lands</title>
+          <defs>
+            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0 H0 V50" fill="none" stroke="#426b69" stroke-width=".6" opacity=".6"/></pattern>
+          </defs>
+          <rect width="1000" height="600" fill="url(#grid)"/>
+          <!-- Real land (very stylised) -->
+          <g fill="#426b69" opacity=".85">
+            <path d="M60 40 L95 30 L110 60 L88 90 L62 80 Z"/>                          <!-- Britain -->
+            <path d="M120 60 L250 40 L300 90 L260 130 L170 120 L130 100Z"/>          <!-- Europe -->
+            <path d="M150 160 L270 150 L320 230 L300 330 L250 430 L215 440 L190 360 L160 280 L135 210Z"/> <!-- Africa -->
+            <path d="M300 60 L640 30 L760 80 L790 160 L700 170 L620 190 L560 180 L500 230 L470 200 L430 180 L380 150 L320 120Z"/> <!-- Asia -->
+            <path d="M455 190 L505 200 L490 260 L470 275 L450 230Z"/>                <!-- India -->
+            <path d="M560 250 L610 270 L600 300 L555 280Z"/>                         <!-- Sumatra -->
+            <path d="M810 150 L840 130 L850 170 L825 210 L805 200Z"/>                <!-- Japan -->
+            <path d="M650 360 L760 340 L820 380 L830 450 L780 490 L700 480 L660 440Z"/> <!-- New Holland -->
+            <path d="M770 510 L800 505 L795 530 L772 528Z"/>                         <!-- Van Diemen's -->
+            <path d="M900 20 L1000 10 L1000 200 L960 180 L930 120 L890 80Z"/>        <!-- N. America -->
+          </g>
+          <g font-family="Inter" font-size="12" fill="#b5ca8d" opacity=".75" font-style="italic">
+            <text x="40" y="22">England</text>
+            <text x="190" y="300">Africa</text>
+            <text x="230" y="470">Cape of Good Hope</text>
+            <text x="560" y="110">Asia</text>
+            <text x="452" y="295">India</text>
+            <text x="612" y="292">Sumatra</text>
+            <text x="852" y="160">Japan</text>
+            <text x="690" y="420">New Holland</text>
+            <text x="690" y="436">(Australia)</text>
+            <text x="745" y="555">Van Diemen's Land</text>
+            <text x="910" y="60">N. America</text>
+          </g>
+          <!-- Routes (rough) -->
+          <g fill="none" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round">
+            <path d="M90 70 C 120 300, 250 520, 400 480 S 560 420, 590 410" stroke="#8bb174"/>
+            <path d="M95 75 C 140 320, 270 520, 420 470 S 700 250, 900 150 S 940 110, 950 100" stroke="#b5ca8d" opacity=".9"/>
+            <path d="M100 80 C 150 330, 290 520, 440 300 S 760 230, 875 230" stroke="#6fa3a0"/>
+            <path d="M85 80 C 110 330, 300 560, 520 540 S 600 520, 610 510" stroke="#e8eedb" opacity=".8"/>
+          </g>
+          <!-- Imaginary lands -->
+          <g fill="#b5ca8d" fill-opacity=".18" stroke="#b5ca8d" stroke-width="1.5" stroke-dasharray="4 3">
+            <path d="M575 395 L600 392 L605 412 L580 418Z"/>
+            <path d="M608 380 L628 378 L630 396 L610 398Z"/>
+            <path d="M930 80 L980 75 L990 140 L950 150 L925 115Z"/>
+            <path d="M880 215 L915 208 L922 240 L888 246Z"/>
+            <path d="M858 265 L882 262 L885 286 L860 288Z"/>
+            <path d="M840 240 L856 238 L858 254 L842 255Z"/>
+            <path d="M585 495 L640 488 L650 530 L600 540Z"/>
+          </g>
+          <!-- Pins -->
+          <g id="pins"></g>
+        </svg>
+        <div class="map-legend">
+          <span><i style="color:#8bb174"></i>Voyage I</span>
+          <span><i style="color:#b5ca8d"></i>Voyage II</span>
+          <span><i style="color:#6fa3a0"></i>Voyage III</span>
+          <span><i style="color:#e8eedb"></i>Voyage IV</span>
+          <span>Dashed outlines = imaginary lands (positions are approximate)</span>
+        </div>
+      </figure>
+      <aside class="map-info" id="map-info" aria-live="polite">
+        <div class="eyebrow">Select a place</div>
+        <h3>Swift's world</h3>
+        <p class="muted">Lilliput and the Houyhnhnm land lie in the southern Indian Ocean near Australia. Brobdingnag is a huge peninsula off North America. Laputa, Balnibarbi and Luggnagg float or sit in the Pacific east of Japan.</p>
+        <p class="muted small">Each voyage goes farther from home and gets stranger.</p>
+      </aside>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+      <h3>Sixteen years at sea, with short visits home</h3>
+      <p class="muted">Each coloured block is a voyage; the striped slivers are his time at home. He keeps leaving his family after just a few months.</p>
+      <div class="tl-bar" role="img" aria-label="Timeline from 1699 to 1715 showing four voyages and short stays at home">
+        <div class="s1" style="flex:35">I · Lilliput</div>
+        <div class="home" style="flex:2" title="Home 2 months"></div>
+        <div class="s2" style="flex:48">II · Brobdingnag</div>
+        <div class="home" style="flex:2" title="Home 2 months"></div>
+        <div class="s3" style="flex:44">III · Laputa…</div>
+        <div class="home" style="flex:4" title="Home ~4 months"></div>
+        <div class="s4" style="flex:64">IV · Houyhnhnms</div>
+      </div>
+      <div class="tl-years"><span>1699</span><span>1702</span><span>1706</span><span>1710</span><span>1715</span></div>
+      <div class="tl-cards">
+        <div class="card"><h4>I · The Antelope</h4><dl><dt>Sails</dt><dd>4 May 1699, Bristol</dd><dt>Disaster</dt><dd>Shipwreck in a storm</dd><dt>Home</dt><dd>13 Apr 1702</dd></dl></div>
+        <div class="card"><h4>II · The Adventure</h4><dl><dt>Sails</dt><dd>20 Jun 1702, the Downs</dd><dt>Disaster</dt><dd>Left behind by shipmates</dd><dt>Home</dt><dd>3 Jun 1706</dd></dl></div>
+        <div class="card"><h4>III · The Hopewell</h4><dl><dt>Sails</dt><dd>5 Aug 1706</dd><dt>Disaster</dt><dd>Captured by pirates</dd><dt>Home</dt><dd>16 Apr 1710</dd></dl></div>
+        <div class="card"><h4>IV · The Adventurer</h4><dl><dt>Sails</dt><dd>7 Aug 1710, Portsmouth</dd><dt>Disaster</dt><dd>His own crew mutinies</dd><dt>Home</dt><dd>5 Dec 1715</dd></dl></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SCALE EXPLORER ======================= -->
+<section class="block alt" id="scale">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="prose">
+        <div class="eyebrow">The big trick of Parts I &amp; II</div>
+        <h2>Same man, two sizes</h2>
+        <p>Swift uses one simple ratio: <b>12 to 1</b>. In Lilliput, Gulliver is twelve times taller than everyone. In Brobdingnag, everyone is twelve times taller than him.</p>
+        <p>Switching the scale changes how things <i>look</i>. From up high, the Lilliputians' wars and court games look silly and small. From down low, Gulliver can see every ugly pore on a giant's skin, and the giant king sees how petty Gulliver's boasting is.</p>
+        <div class="seg" role="group" aria-label="Choose a scale">
+          <button type="button" data-scale="lilliput" aria-pressed="true">In Lilliput</button>
+          <button type="button" data-scale="england" aria-pressed="false">At home</button>
+          <button type="button" data-scale="brob" aria-pressed="false">In Brobdingnag</button>
+        </div>
+        <p class="scale-note" id="scale-note" aria-live="polite"></p>
+      </div>
+      <figure class="figure">
+        <svg id="scale-svg" viewBox="0 0 480 340" role="img" aria-labelledby="scale-t">
+          <title id="scale-t">Height comparison between Gulliver, a Lilliputian and a Brobdingnagian</title>
+          <defs>
+            <g id="person">
+              <circle cx="0" cy="-88" r="11"/>
+              <path d="M-14 -74 Q0 -78 14 -74 L18 -36 L10 -36 L9 0 L2 0 L0 -32 L-2 0 L-9 0 L-10 -36 L-18 -36Z"/>
+            </g>
+          </defs>
+          <rect x="0" y="300" width="480" height="40" fill="#e8eedb"/>
+          <line x1="0" y1="300" x2="480" y2="300" stroke="#2a4849" stroke-width="2"/>
+          <g class="fig" id="fig-lil" transform="translate(110 300) scale(1)"><use href="#person" fill="#8bb174"/></g>
+          <g class="fig" id="fig-gul" transform="translate(240 300) scale(1)"><use href="#person" fill="#222e50"/></g>
+          <g class="fig" id="fig-brob" transform="translate(370 300) scale(1)"><use href="#person" fill="#426b69"/></g>
+          <g font-family="Inter" font-size="12" font-weight="600" fill="#2a4849" text-anchor="middle">
+            <text class="scale-label" x="110" y="322">Lilliputian</text>
+            <text class="scale-label" x="240" y="322">Gulliver</text>
+            <text class="scale-label" x="370" y="322">Brobdingnagian</text>
+          </g>
+          <text id="scale-caption" x="240" y="28" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#222e50"></text>
+        </svg>
+        <figcaption>Ratio from the book: 12 : 1. The Lilliputians are "not six inches high"; Brobdingnagians are "as tall as an ordinary spire-steeple."</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PART I ======================= -->
+<section id="part1">
+  <div class="part-banner banner-1">
+    <div class="big-num" aria-hidden="true">I</div>
+    <div class="wrap">
+      <div class="eyebrow">Part I · A Voyage to Lilliput</div>
+      <h2>The giant among tiny people</h2>
+      <p class="lede">Shipwrecked, Gulliver wakes up tied to the ground by hundreds of threads. He becomes the emperor's most powerful weapon, and then his most dangerous embarrassment.</p>
+      <div class="facts"><span>8 chapters</span><span>Ship: the Antelope</span><span>Stay: 9 months, 13 days</span><span>His nickname: Quinbus Flestrin, the "Man-Mountain"</span></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <h3>The story in eight beats</h3>
+          <ol class="beats">
+            <li data-n="1"><span class="ch">Ch. 1</span><h4>Shipwreck and capture</h4><p>The Antelope hits a rock. Gulliver swims ashore, falls asleep, and wakes pinned down by tiny ropes while people six inches tall shoot arrows at him.</p></li>
+            <li data-n="2"><span class="ch">Ch. 1–2</span><h4>Carried to the capital</h4><p>Drugged with sleeping potion in his wine, he's pulled on a giant cart by 1,500 horses to Mildendo and chained inside an old temple.</p></li>
+            <li data-n="3"><span class="ch">Ch. 2</span><h4>Pockets searched</h4><p>Officials make a hilarious inventory of his things (his comb is "a sort of engine" with twenty long poles "resembling the pallisados" of the palace, and his watch might be "the god that he worships"). His sword and pistols are taken.</p></li>
+            <li data-n="4"><span class="ch">Ch. 3</span><h4>Court games and freedom</h4><p>He watches officials win jobs by rope-dancing and silk threads by leaping over sticks. He is freed on conditions, such as not trampling anyone.</p></li>
+            <li data-n="5"><span class="ch">Ch. 4–5</span><h4>The egg war and the stolen fleet</h4><p>He learns of the war with Blefuscu, wades across the channel and drags away fifty warships. He's made a <i>Nardac</i>, but refuses to help enslave Blefuscu.</p></li>
+            <li data-n="6"><span class="ch">Ch. 5</span><h4>The palace fire</h4><p>The empress's rooms catch fire. Gulliver puts it out the only way he can: by urinating on it. The empress is disgusted and never forgives him.</p></li>
+            <li data-n="7"><span class="ch">Ch. 7</span><h4>Charged with treason</h4><p>His enemies, Admiral Bolgolam and Treasurer Flimnap, plot against him. The "lenient" sentence is to put out his eyes. Warned by a friend, he escapes to Blefuscu.</p></li>
+            <li data-n="8"><span class="ch">Ch. 8</span><h4>Home with tiny cattle</h4><p>He finds a real boat washed ashore, sails off, is picked up by an English ship, and makes money showing his miniature sheep and cows in England.</p></li>
+          </ol>
+        </div>
+        <div>
+          <figure class="figure">
+            <svg viewBox="0 0 520 300" role="img" aria-labelledby="lil-t">
+              <title id="lil-t">Gulliver tied to the ground surrounded by tiny Lilliputians</title>
+              <rect width="520" height="300" rx="10" fill="#e8eedb"/>
+              <path d="M0 210 Q130 196 260 210 T520 206 V300 H0Z" fill="#b5ca8d"/>
+              <!-- Gulliver lying down -->
+              <g>
+                <ellipse cx="270" cy="232" rx="210" ry="14" fill="#2a4849" opacity=".15"/>
+                <circle cx="88" cy="196" r="34" fill="#e9dcc6"/>
+                <path d="M60 180 Q70 158 100 162 L112 186Z" fill="#8a7a63"/>
+                <circle cx="80" cy="192" r="3" fill="#222e50"/>
+                <rect x="118" y="172" width="200" height="56" rx="20" fill="#222e50"/>
+                <rect x="300" y="182" width="170" height="18" rx="9" fill="#2a4849"/>
+                <rect x="300" y="204" width="170" height="18" rx="9" fill="#2a4849"/>
+                <rect x="462" y="176" width="22" height="26" rx="6" fill="#4b3e2e"/>
+                <rect x="462" y="200" width="22" height="26" rx="6" fill="#4b3e2e"/>
+                <rect x="150" y="150" width="150" height="14" rx="7" fill="#222e50" transform="rotate(-6 150 150)"/>
+              </g>
+              <!-- Threads -->
+              <g stroke="#f4f6ee" stroke-width="1.2" opacity=".95">
+                <path d="M60 238 L120 160"/><path d="M80 240 L140 166"/><path d="M110 240 L170 162"/>
+                <path d="M150 240 L200 166"/><path d="M190 240 L240 166"/><path d="M230 240 L280 166"/>
+                <path d="M270 240 L320 172"/><path d="M310 240 L360 178"/><path d="M350 240 L400 178"/>
+                <path d="M390 240 L440 178"/><path d="M430 240 L470 178"/>
+                <path d="M54 170 L120 236"/><path d="M60 156 L110 236"/>
+              </g>
+              <!-- Tiny people -->
+              <g fill="#426b69" id="tiny-people">
+                <g transform="translate(200 168) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(214 168) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(260 168) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(120 162) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(40 250) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(150 262) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(170 266) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(300 262) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(380 266) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+                <g transform="translate(470 262) scale(.13)"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 L14 -74 L18 -36 L9 0 L-9 0 L-18 -36Z"/></g>
+              </g>
+              <!-- tiny ladder + arrows -->
+              <g stroke="#4b3e2e" stroke-width="1.3"><path d="M128 238 L136 172 M136 238 L144 172"/><path d="M129 228 H137 M130 216 H138 M132 204 H140 M133 192 H141 M135 180 H143"/></g>
+              <g stroke="#222e50" stroke-width="1"><path d="M30 120 L60 150"/><path d="M40 110 L66 142"/><path d="M110 112 L96 150"/></g>
+              <text x="20" y="34" font-family="Fraunces" font-size="18" fill="#222e50">"I could not stir"</text>
+              <text x="20" y="54" font-family="Inter" font-size="12" fill="#4b5670">Part I, Chapter 1</text>
+            </svg>
+            <figcaption>Gulliver wakes to find his arms, legs and even his hair tied to pegs in the ground.</figcaption>
+          </figure>
+
+          <div class="card" style="margin-top:20px">
+            <h4>Who's who at the Lilliputian court</h4>
+            <ul style="margin:0;padding-left:1.1em">
+              <li><b>The Emperor</b>: proud, warlike, and "taller by almost the breadth of my nail" than his courtiers.</li>
+              <li><b>Flimnap</b>, the Treasurer: best rope-dancer, worries about Gulliver's food bill, becomes an enemy.</li>
+              <li><b>Skyresh Bolgolam</b>, the Admiral: Gulliver's "mortal enemy" from the start.</li>
+              <li><b>Reldresal</b>, Secretary: Gulliver's friend, who still proposes blinding him as the "merciful" option.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Egg war explainer -->
+      <div style="margin-top:64px">
+        <div class="prose">
+          <div class="eyebrow">Explainer</div>
+          <h3>The great egg war (and the shoe-heel parties)</h3>
+          <p>Long ago, a Lilliputian prince cut his finger breaking an egg at the big end, so the emperor ordered everyone to break eggs at the <b>small</b> end. People who refused, the <b>Big-Endians</b>, rebelled six times and fled to Blefuscu, which now backs them in a war that has lasted "six-and-thirty moons." Eleven thousand people have died rather than break their eggs at the smaller end.</p>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <div class="egg-row">
+            <div class="egg-side">
+              <svg viewBox="0 0 160 170" width="150" style="margin:0 auto" aria-hidden="true">
+                <ellipse cx="80" cy="100" rx="52" ry="64" fill="#f4f6ee" stroke="#2a4849" stroke-width="3"/>
+                <path d="M30 120 L45 110 L58 124 L72 108 L86 124 L100 108 L114 122 L130 112" fill="none" stroke="#2a4849" stroke-width="3" transform="translate(0 30)"/>
+                <path d="M68 168 L74 150 L80 160" stroke="#b5654a" stroke-width="2" fill="none"/>
+                <text x="80" y="18" font-family="Inter" font-size="12" font-weight="700" text-anchor="middle" fill="#2a4849">crack the BIG end ↓</text>
+              </svg>
+              <h4>Big-Endians</h4>
+              <p class="muted small">Exiled to Blefuscu · their books banned</p>
+            </div>
+            <div class="vs">vs</div>
+            <div class="egg-side">
+              <svg viewBox="0 0 160 170" width="150" style="margin:0 auto" aria-hidden="true">
+                <ellipse cx="80" cy="96" rx="52" ry="64" fill="#f4f6ee" stroke="#2a4849" stroke-width="3" transform="rotate(180 80 96)"/>
+                <path d="M40 56 L54 66 L66 52 L80 68 L94 52 L108 66 L122 54" fill="none" stroke="#2a4849" stroke-width="3"/>
+                <text x="80" y="18" font-family="Inter" font-size="12" font-weight="700" text-anchor="middle" fill="#2a4849">crack the small end ↑</text>
+              </svg>
+              <h4>Little-Endians</h4>
+              <p class="muted small">The emperor's law in Lilliput</p>
+            </div>
+          </div>
+          <p class="small muted" style="text-align:center;margin-top:16px">Their holy book only says: "all true believers break their eggs at the <b>convenient</b> end." Which end is convenient? Nobody can agree.</p>
+        </div>
+
+        <h3 style="margin-top:48px">Decoding the satire</h3>
+        <p class="prose muted">Swift's first readers in 1726 would have recognised these jokes immediately.</p>
+        <div class="table-scroll">
+        <table class="decoder">
+          <thead><tr><th>In Lilliput…</th><th></th><th>…Swift is mocking</th></tr></thead>
+          <tbody>
+            <tr><td>Lilliput vs. Blefuscu</td><td class="arrow">→</td><td>England vs. France, two rival neighbours always at war</td></tr>
+            <tr><td>Big-Endians vs. Little-Endians</td><td class="arrow">→</td><td>Catholics vs. Protestants: bloody fights over religious details</td></tr>
+            <tr><td>High Heels vs. Low Heels (Tramecksan &amp; Slamecksan)</td><td class="arrow">→</td><td>Tories vs. Whigs, England's two political parties. The prince wears one high heel and one low, so he wobbles.</td></tr>
+            <tr><td>Rope-dancing for jobs</td><td class="arrow">→</td><td>Politicians who win power by clever tricks, not by being good at the job</td></tr>
+            <tr><td>Flimnap, the Treasurer</td><td class="arrow">→</td><td>Probably Robert Walpole, Britain's powerful first minister</td></tr>
+            <tr><td>Tiny people, huge pride</td><td class="arrow">→</td><td>Human self-importance. From high enough up, our quarrels look ridiculous</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div class="quiz-block" data-section="p1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PART II ======================= -->
+<section id="part2">
+  <div class="part-banner banner-2">
+    <div class="big-num" aria-hidden="true">II</div>
+    <div class="wrap">
+      <div class="eyebrow">Part II · A Voyage to Brobdingnag</div>
+      <h2>The tiny man among giants</h2>
+      <p class="lede">Only two months after getting home, Gulliver sails again. This time he's the one who's pocket-sized: a toy, a pet and a curiosity, in a land of wise giants.</p>
+      <div class="facts"><span>8 chapters</span><span>Ship: the Adventure</span><span>Stay: about 2 years</span><span>His nickname: Grildrig, "mannikin"</span></div>
+    </div>
+  </div>
+
+  <div class="block alt">
+    <div class="wrap">
+      <div class="grid-2">
+        <div>
+          <h3>The story in eight beats</h3>
+          <ol class="beats">
+            <li data-n="1"><span class="ch">Ch. 1</span><h4>Abandoned on shore</h4><p>Exploring for water, Gulliver's shipmates see a giant and row off without him. A farmhand picks him up between finger and thumb.</p></li>
+            <li data-n="2"><span class="ch">Ch. 1</span><h4>The farmer's house</h4><p>He fights two rats as big as mastiffs with his sword, and is nearly swallowed by a baby. Everything he loved about being big is reversed.</p></li>
+            <li data-n="3"><span class="ch">Ch. 2</span><h4>Glumdalclitch</h4><p>The farmer's 9-year-old daughter becomes his "little nurse." She names him <i>Grildrig</i> and teaches him the language.</p></li>
+            <li data-n="4"><span class="ch">Ch. 2–3</span><h4>Shown for money, then sold</h4><p>The farmer exhibits him in towns until he's half-starved, then sells him to the queen for 1,000 gold pieces. Glumdalclitch stays as his nurse.</p></li>
+            <li data-n="5"><span class="ch">Ch. 3–5</span><h4>Dangers at court</h4><p>The jealous queen's dwarf drops him in a bowl of cream and jams him in a marrow-bone. Wasps, a frog, a linnet and a monkey all attack him. The monkey carries him onto a roof!</p></li>
+            <li data-n="6"><span class="ch">Ch. 6</span><h4>Explaining England</h4><p>Over five or six audiences, Gulliver proudly describes England's parliament, courts and wars. The king asks sharp questions and pronounces his famous verdict.</p></li>
+            <li data-n="7"><span class="ch">Ch. 7</span><h4>The gunpowder offer</h4><p>Hoping to impress, Gulliver offers to make cannons for the king. The king is horrified and forbids him ever to mention it.</p></li>
+            <li data-n="8"><span class="ch">Ch. 8</span><h4>Carried off by an eagle</h4><p>An eagle grabs his travelling box and drops it in the sea. An English ship rescues him, and for weeks at home everyone looks like a pygmy to him.</p></li>
+          </ol>
+        </div>
+        <div>
+          <figure class="figure">
+            <svg viewBox="0 0 520 330" role="img" aria-labelledby="brob-t">
+              <title id="brob-t">A giant hand holding tiny Gulliver, with dangers around him</title>
+              <rect width="520" height="330" rx="10" fill="#f4f6ee"/>
+              <!-- giant hand -->
+              <path d="M520 330 L520 160 Q470 140 430 170 L300 210 Q260 222 268 246 Q276 266 310 256 L360 246 L250 262 Q214 268 218 292 Q222 312 252 310 L330 302 Q300 316 304 330Z" fill="#e9dcc6" stroke="#b39a7a" stroke-width="2"/>
+              <path d="M300 210 L230 200 Q200 198 200 222 Q202 244 232 244 L300 238" fill="#e9dcc6" stroke="#b39a7a" stroke-width="2"/>
+              <path d="M360 246 Q330 236 320 250" stroke="#b39a7a" fill="none" stroke-width="1.5"/>
+              <!-- tiny gulliver -->
+              <g transform="translate(330 248) scale(.28)" fill="#222e50"><circle cx="0" cy="-88" r="11"/><path d="M-14 -74 Q0 -78 14 -74 L18 -36 L10 -36 L9 0 L2 0 L0 -32 L-2 0 L-9 0 L-10 -36 L-18 -36Z"/><path d="M18 -60 L48 -90" stroke="#222e50" stroke-width="5"/></g>
+              <!-- dangers -->
+              <g font-family="Inter" font-size="12" fill="#222e50" font-weight="600">
+                <g transform="translate(40 40)"><circle r="30" fill="#b5ca8d"/><text text-anchor="middle" y="5" font-size="22">🐀</text><text x="40" y="5">Rats the size of mastiffs</text></g>
+                <g transform="translate(40 110)"><circle r="30" fill="#b5ca8d"/><text text-anchor="middle" y="5" font-size="22">🐝</text><text x="40" y="5">Wasps as big as partridges</text></g>
+                <g transform="translate(40 180)"><circle r="30" fill="#b5ca8d"/><text text-anchor="middle" y="5" font-size="22">🐒</text><text x="40" y="5">A monkey who thinks he's a baby</text></g>
+                <g transform="translate(40 250)"><circle r="30" fill="#b5ca8d"/><text text-anchor="middle" y="5" font-size="22">🦅</text><text x="40" y="5">The eagle that steals his box</text></g>
+              </g>
+            </svg>
+            <figcaption>In Lilliput, Gulliver was the danger. In Brobdingnag, everything is a danger to him, even a kitchen monkey.</figcaption>
+          </figure>
+
+          <blockquote class="quote">
+            I cannot but conclude the bulk of your natives to be the most pernicious race of little odious vermin that nature ever suffered to crawl upon the surface of the earth.
+            <cite>The King of Brobdingnag, after hearing Gulliver praise England · Part II, Ch. 6</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <div style="margin-top:56px">
+        <div class="eyebrow">Explainer</div>
+        <h3>Why the giant king is the hero of Part II</h3>
+        <div class="grid-3" style="margin-top:16px">
+          <div class="card"><h4>What Gulliver brags about</h4><p>Parliament, judges, the army, a hundred years of English history, and the power of gunpowder. He thinks he's making England look magnificent.</p></div>
+          <div class="card"><h4>What the king hears</h4><p>Bribery, lawyers who twist the law, endless wars, debt, and a history of "conspiracies, rebellions, murders, massacres." He sees the truth Gulliver can't.</p></div>
+          <div class="card"><h4>What the king values</h4><p>Common sense and kindness. Whoever could make "two ears of corn, or two blades of grass" grow where one grew before, he says, does more good than all politicians.</p></div>
+        </div>
+        <div class="callout">
+          <strong>Notice the flip</strong>
+          The giants aren't perfect. Up close their skin looks blotchy and gross, and a criminal's execution is horrifying. But their <b>king</b> is the wisest ruler Gulliver has met. Being big here means being <i>morally</i> big, and Gulliver's England looks small and nasty beside it.
+        </div>
+      </div>
+
+      <div class="quiz-block" data-section="p2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PART III ======================= -->
+<section id="part3">
+  <div class="part-banner banner-3">
+    <div class="big-num" aria-hidden="true">III</div>
+    <div class="wrap">
+      <div class="eyebrow">Part III · A Voyage to Laputa, Balnibarbi, Glubbdubdrib, Luggnagg and Japan</div>
+      <h2>Island-hopping among the "experts"</h2>
+      <p class="lede">The most scattered voyage: five stops instead of one. The common thread? People who are brilliant in theory and useless, or worse, in real life.</p>
+      <div class="facts"><span>11 chapters</span><span>Ship: the Hopewell</span><span>Taken by pirates, set adrift in a canoe</span><span>Five stops</span></div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="wrap">
+      <!-- Route -->
+      <h3>The route, stop by stop</h3>
+      <figure class="figure" style="margin-top:12px">
+        <svg viewBox="0 0 1000 200" role="img" aria-labelledby="route-t">
+          <title id="route-t">Route of Part III: Laputa, Balnibarbi, Glubbdubdrib, Luggnagg, Japan, then home</title>
+          <path d="M70 120 C 180 60, 240 160, 330 120 S 480 70, 520 120 S 680 170, 720 120 S 860 70, 930 120" fill="none" stroke="#426b69" stroke-width="3" stroke-dasharray="8 7"/>
+          <g font-family="Inter" text-anchor="middle">
+            <g transform="translate(70 120)"><circle r="26" fill="#222e50"/><text y="5" fill="#b5ca8d" font-weight="700" font-size="14">1</text><text y="50" font-size="14" font-weight="700" fill="#222e50">Laputa</text><text y="68" font-size="11.5" fill="#4b5670">flying island</text></g>
+            <g transform="translate(330 120)"><circle r="26" fill="#222e50"/><text y="5" fill="#b5ca8d" font-weight="700" font-size="14">2</text><text y="50" font-size="14" font-weight="700" fill="#222e50">Balnibarbi · Lagado</text><text y="68" font-size="11.5" fill="#4b5670">the mad Academy</text></g>
+            <g transform="translate(520 120)"><circle r="26" fill="#222e50"/><text y="5" fill="#b5ca8d" font-weight="700" font-size="14">3</text><text y="50" font-size="14" font-weight="700" fill="#222e50">Glubbdubdrib</text><text y="68" font-size="11.5" fill="#4b5670">island of sorcerers</text></g>
+            <g transform="translate(720 120)"><circle r="26" fill="#222e50"/><text y="5" fill="#b5ca8d" font-weight="700" font-size="14">4</text><text y="50" font-size="14" font-weight="700" fill="#222e50">Luggnagg</text><text y="68" font-size="11.5" fill="#4b5670">the immortals</text></g>
+            <g transform="translate(930 120)"><circle r="26" fill="#8bb174"/><text y="5" fill="#222e50" font-weight="700" font-size="14">5</text><text y="50" font-size="14" font-weight="700" fill="#222e50">Japan → home</text><text y="68" font-size="11.5" fill="#4b5670">via Amsterdam, 1710</text></g>
+          </g>
+          <text x="500" y="30" text-anchor="middle" font-family="Fraunces" font-size="17" fill="#222e50" font-style="italic">Every stop shows a different way that cleverness goes wrong</text>
+        </svg>
+      </figure>
+
+      <div class="grid-2" style="margin-top:48px">
+        <div class="prose">
+          <div class="eyebrow">Stop 1 · Laputa</div>
+          <h3>The flying island of absent-minded thinkers</h3>
+          <p>After pirates (and a nasty Dutchman) set him adrift, Gulliver is hauled up by chain onto <b>Laputa</b>, an island that floats in the sky above the kingdom of <b>Balnibarbi</b>.</p>
+          <p>Laputans care only about <b>mathematics and music</b>. One head tilts left, one eye turns inward and the other up at the stars. They are so lost in thought that servants called <b>flappers</b> have to bop them with a dried bladder to make them listen. Their tailor measures Gulliver with a quadrant and the suit comes out all wrong. Their houses are badly built because they despise practical geometry.</p>
+          <p>The island is also a weapon. If a city below rebels, the king parks the island overhead to block sun and rain, or threatens to drop it on them.</p>
+          <div class="callout"><strong>Real target</strong>Scientists of the Royal Society who loved theory more than useful results, and England's harsh rule over Ireland. The city of Lindalino, which fights back with magnets and wins, may stand for Dublin.</div>
+        </div>
+        <figure class="figure">
+          <svg viewBox="0 0 460 360" role="img" aria-labelledby="lap-t">
+            <title id="lap-t">Diagram of the flying island of Laputa held up by a giant magnet</title>
+            <rect width="460" height="360" rx="10" fill="#e8eedb"/>
+            <!-- sky arrows -->
+            <g stroke="#426b69" stroke-width="2" fill="#426b69">
+              <path d="M60 140 V90"/><path d="M54 98 L60 86 L66 98Z"/>
+              <path d="M400 90 V140"/><path d="M394 132 L400 144 L406 132Z"/>
+            </g>
+            <text x="60" y="76" font-family="Inter" font-size="11" text-anchor="middle" fill="#2a4849" font-weight="700">REPEL → rise</text>
+            <text x="400" y="160" font-family="Inter" font-size="11" text-anchor="middle" fill="#2a4849" font-weight="700">ATTRACT → sink</text>
+            <!-- island -->
+            <ellipse cx="230" cy="120" rx="160" ry="22" fill="#8bb174"/>
+            <path d="M70 120 Q230 250 390 120" fill="#426b69"/>
+            <path d="M70 120 Q230 220 390 120" fill="#2a4849" opacity=".35"/>
+            <g fill="#222e50"><rect x="150" y="86" width="20" height="24"/><rect x="180" y="78" width="26" height="32"/><path d="M178 78 L193 62 L208 78Z"/><rect x="250" y="88" width="22" height="22"/><rect x="280" y="80" width="18" height="30"/></g>
+            <!-- cutaway cave + magnet -->
+            <ellipse cx="230" cy="160" rx="44" ry="22" fill="#f4f6ee" stroke="#222e50" stroke-width="1.5"/>
+            <g transform="rotate(-18 230 160)">
+              <rect x="196" y="155" width="68" height="10" rx="3" fill="#222e50"/>
+              <rect x="196" y="155" width="16" height="10" rx="3" fill="#b5654a"/>
+            </g>
+            <line x1="230" y1="160" x2="300" y2="212" stroke="#222e50" stroke-width="1"/>
+            <text x="446" y="222" text-anchor="end" font-family="Inter" font-size="12" fill="#222e50" font-weight="700">Loadstone (giant magnet)</text>
+            <text x="446" y="237" text-anchor="end" font-family="Inter" font-size="11" fill="#4b5670">tilted by astronomers</text>
+            <text x="120" y="40" font-family="Fraunces" font-size="18" fill="#222e50">Laputa: about 4½ miles across</text>
+            <!-- ground -->
+            <path d="M0 300 Q120 284 230 296 T460 292 V360 H0Z" fill="#8bb174"/>
+            <g fill="#2a4849" opacity=".8"><rect x="70" y="280" width="14" height="16"/><rect x="90" y="274" width="18" height="22"/><rect x="320" y="278" width="16" height="18"/><rect x="340" y="272" width="12" height="24"/></g>
+            <text x="230" y="335" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#222e50">Balnibarbi (the kingdom below)</text>
+            <path d="M230 205 V265" stroke="#222e50" stroke-dasharray="4 4"/>
+          </svg>
+          <figcaption>The island can only move over Balnibarbi, because the magnet needs the minerals in that land to push and pull against.</figcaption>
+        </figure>
+      </div>
+
+      <!-- Lagado -->
+      <div style="margin-top:64px">
+        <div class="prose">
+          <div class="eyebrow">Stop 2 · Balnibarbi and the Academy of Lagado</div>
+          <h3>A whole country ruined by bright ideas</h3>
+          <p>Down on the ground, the capital <b>Lagado</b> is in ruins and the fields are bare. Why? "Projectors" came back from Laputa full of schemes, built an Academy, and made everyone follow their experiments. None of them work. Only old Lord <b>Munodi</b>, who farms the old-fashioned way, has a green, thriving estate, and everyone mocks him for it.</p>
+          <p><b>Tap each card</b> to see what the Academy's professors are working on.</p>
+        </div>
+        <div class="grid-4" style="margin-top:20px" id="lagado">
+          <button class="flip" type="button" aria-label="Flip card: Project 1">
+            <div class="flip-inner">
+              <div class="flip-face flip-front"><span class="tag">Project 1</span><div class="flip-icon">🥒☀️</div><h4>Food science</h4><span class="hint">Tap to reveal ↻</span></div>
+              <div class="flip-face flip-back"><span class="tag">Eight years so far…</span><p>Extracting <b>sunbeams out of cucumbers</b>, to be sealed in jars and let out on cold summer days. He's asking for more money.</p></div>
+            </div>
+          </button>
+          <button class="flip" type="button" aria-label="Flip card: Project 2">
+            <div class="flip-inner">
+              <div class="flip-face flip-front"><span class="tag">Project 2</span><div class="flip-icon">🏠⬇️</div><h4>Architecture</h4><span class="hint">Tap to reveal ↻</span></div>
+              <div class="flip-face flip-back"><span class="tag">Inspired by bees</span><p>Building houses by starting <b>at the roof and working downward</b> to the foundation.</p></div>
+            </div>
+          </button>
+          <button class="flip" type="button" aria-label="Flip card: Project 3">
+            <div class="flip-inner">
+              <div class="flip-face flip-front"><span class="tag">Project 3</span><div class="flip-icon">🐖🌾</div><h4>Farming</h4><span class="hint">Tap to reveal ↻</span></div>
+              <div class="flip-face flip-back"><span class="tag">Saves on ploughs</span><p><b>Ploughing with hogs</b>: bury acorns, let pigs root them up. The pigs dig the field, but the crop fails.</p></div>
+            </div>
+          </button>
+          <button class="flip" type="button" aria-label="Flip card: Project 4">
+            <div class="flip-inner">
+              <div class="flip-face flip-front"><span class="tag">Project 4</span><div class="flip-icon">📦🗣️</div><h4>Language</h4><span class="hint">Tap to reveal ↻</span></div>
+              <div class="flip-face flip-back"><span class="tag">No more words</span><p>Since words are just names for things, wise men stop talking and <b>carry sacks of objects</b> to hold up instead. There's also a word-machine that writes books by chance.</p></div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Glubbdubdrib + Luggnagg -->
+      <div class="grid-2" style="margin-top:64px; align-items:end">
+        <div class="prose">
+          <div class="eyebrow">Stop 3 · Glubbdubdrib</div>
+          <h3>Dinner with the ghosts of history</h3>
+          <p>The governor of this "island of sorcerers" can summon the dead for 24 hours at a time. Gulliver meets <b>Alexander the Great</b>, <b>Hannibal</b>, <b>Julius Caesar and Brutus</b>, <b>Homer</b> and <b>Aristotle</b>.</p>
+          <p>The lesson he takes away: history books lie. Famous "great men" were often villains, and many heroes were forgotten. Modern nobles turn out to be descended from servants and crooks.</p>
+          <div class="eyebrow" style="margin-top:32px">Stop 4 · Luggnagg</div>
+          <h3>The curse of the Struldbrugs</h3>
+          <p>In Luggnagg, a few babies are born with a spot over the left eyebrow: they are <b>Struldbrugs</b>, and they will never die. Gulliver is thrilled and imagines becoming rich, wise and endlessly learned.</p>
+          <p>Then he hears the truth: they never die, but they <b>never stop getting older</b>. Drag the slider.</p>
+        </div>
+        <div class="card">
+          <div class="age-panel">
+            <svg viewBox="0 0 200 220" aria-hidden="true" id="struld-svg">
+              <circle cx="100" cy="100" r="70" fill="#e9dcc6" id="s-face"/>
+              <path id="s-hair" d="M32 90 Q40 30 100 28 Q160 30 168 90 Q150 56 100 56 Q50 56 32 90Z" fill="#8a7a63"/>
+              <circle id="s-spot" cx="124" cy="74" r="7" fill="#c0392b"/>
+              <path d="M66 86 H86 M114 86 H134" stroke="#222e50" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="78" cy="100" r="4" fill="#222e50"/><circle cx="122" cy="100" r="4" fill="#222e50"/>
+              <path id="s-mouth" d="M80 136 Q100 148 120 136" stroke="#222e50" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <g id="s-wrinkles" stroke="#8a7a63" stroke-width="1.5" fill="none" opacity="0"><path d="M60 60 Q100 50 140 60"/><path d="M64 68 Q100 60 136 68"/><path d="M56 118 Q62 128 58 138"/><path d="M144 118 Q138 128 142 138"/></g>
+              <text x="100" y="205" text-anchor="middle" font-family="Inter" font-size="12" fill="#4b5670" id="s-spot-label">spot: red</text>
+            </svg>
+            <div>
+              <div class="age-readout"><span id="age-num">0</span> <span class="small muted" style="font-family:var(--ui)">years old</span></div>
+              <input class="age-slider" id="age" type="range" min="0" max="200" step="1" value="0" aria-label="Struldbrug age">
+              <div class="age-ticks"><span style="left:0">0</span><span style="left:15%">30</span><span style="left:40%">80</span><span style="left:100%">200</span></div>
+              <p class="age-text" id="age-text" aria-live="polite"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>The point</strong>
+        Gulliver's dream of living forever was just another "brilliant idea" that falls apart in real life, like the cucumber sunbeams. After meeting the Struldbrugs, he says no tyrant could invent a death he wouldn't gladly run to instead.
+      </div>
+      <p class="prose muted">On the last leg, he sails to <b>Japan</b> pretending to be Dutch, and asks to be excused from the ceremony of trampling on a crucifix (the Emperor finds that suspicious). He gets home through Amsterdam in April 1710.</p>
+
+      <div class="quiz-block" data-section="p3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PART IV ======================= -->
+<section id="part4">
+  <div class="part-banner banner-4">
+    <div class="big-num" aria-hidden="true">IV</div>
+    <div class="wrap">
+      <div class="eyebrow">Part IV · A Voyage to the Country of the Houyhnhnms</div>
+      <h2>Where horses rule and humans are beasts</h2>
+      <p class="lede">The darkest and most important voyage. Gulliver finds a society that runs on pure reason, and it belongs to horses. The human-shaped creatures here, the Yahoos, are filthy animals. Gulliver can't stop seeing himself in them.</p>
+      <div class="facts"><span>12 chapters</span><span>Ship: the Adventurer (he's captain)</span><span>Stay: about 5 years, his longest</span><span>Say it: "WHIN-ims"</span></div>
+    </div>
+  </div>
+
+  <div class="block alt">
+    <div class="wrap">
+      <div class="compare">
+        <div class="h">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><path d="M30 118 L34 80 C20 72 20 52 34 42 L44 18 L52 34 C72 32 92 48 92 68 L98 90 C98 100 88 100 86 92 L80 76 L70 80 L70 118Z" fill="#b5ca8d"/><circle cx="44" cy="52" r="3.5" fill="#222e50"/><path d="M52 34 C62 44 68 58 68 80" stroke="#8bb174" stroke-width="4" fill="none"/></svg>
+          <div class="eyebrow">The masters</div>
+          <h3>Houyhnhnms</h3>
+          <p>Horses who are calm, clean, honest and ruled entirely by <b>reason</b>.</p>
+          <ul>
+            <li>No word for lying, so they call it "saying <i>the thing which is not</i>"</li>
+            <li>No war, no money, no lawyers, no government but a general assembly</li>
+            <li>They even "exhort" instead of command</li>
+            <li>They face death calmly and don't grieve much, not even for family</li>
+            <li>Friendly and polite, but cool. Love is a matter of reason</li>
+          </ul>
+        </div>
+        <div class="y">
+          <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="30" r="16" fill="#8a7a63"/><path d="M42 24 Q40 6 60 8 Q82 6 78 26 Q90 40 82 60 L74 40Z M46 44 Q30 60 34 80 L44 56Z" fill="#4b3e2e"/><path d="M44 48 Q60 42 76 48 L80 86 L70 86 L68 118 L60 118 L58 94 L54 118 L46 118 L46 86 L38 86Z" fill="#8a7a63"/><path d="M38 70 L24 92 M82 70 L96 92" stroke="#8a7a63" stroke-width="6" stroke-linecap="round"/></svg>
+          <div class="eyebrow">The beasts</div>
+          <h3>Yahoos</h3>
+          <p>Hairy, dirty, human-shaped creatures used as work animals. Gulliver looks just like one.</p>
+          <ul>
+            <li>Greedy: they fight over shiny stones they don't need</li>
+            <li>They eat anything and get drunk on a juicy root</li>
+            <li>They follow a leader who is the "most deformed" and keep a favourite who licks his feet</li>
+            <li>Kept tied up in kennels and used to pull carts</li>
+            <li>Gulliver's clothes are the only thing that hides him</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:56px">
+        <div>
+          <h3>The story in eight beats</h3>
+          <ol class="beats">
+            <li data-n="1"><span class="ch">Ch. 1</span><h4>Mutiny and marooning</h4><p>Gulliver is captain now, but his crew of ex-buccaneers takes the ship and dumps him on an unknown shore. Yahoos attack him; a dapple-grey horse rescues him.</p></li>
+            <li data-n="2"><span class="ch">Ch. 2–3</span><h4>A clever Yahoo?</h4><p>Taken home by his "master," he lives in a stable on oat-cakes and milk, and learns their neighing language. He hides his body under his clothes.</p></li>
+            <li data-n="3"><span class="ch">Ch. 3–4</span><h4>"The thing which is not"</h4><p>His master can't believe a Yahoo can reason, and can't understand why anyone would lie, or why horses in England are ridden by Yahoos.</p></li>
+            <li data-n="4"><span class="ch">Ch. 5–7</span><h4>Explaining Europe… again</h4><p>Gulliver describes war, lawyers, money, doctors, and prime ministers. His master concludes humans are Yahoos who've used a little reason to make their vices worse.</p></li>
+            <li data-n="5"><span class="ch">Ch. 8</span><h4>Seeing himself in the Yahoos</h4><p>Bathing in a river, he's grabbed by a young female Yahoo. The proof is undeniable: the Yahoos see him as one of their own.</p></li>
+            <li data-n="6"><span class="ch">Ch. 9–10</span><h4>The assembly's "exhortation"</h4><p>The general assembly decides he must be sent away, in case he leads the Yahoos in a raid. Gulliver faints from grief.</p></li>
+            <li data-n="7"><span class="ch">Ch. 10–11</span><h4>Canoe of Yahoo skins</h4><p>With the sorrel nag's help, he builds a canoe, says goodbye, and rows off. Natives in New Holland shoot him in the knee with an arrow.</p></li>
+            <li data-n="8"><span class="ch">Ch. 11–12</span><h4>Home, but not really</h4><p>Kind Portuguese captain Pedro de Mendez brings him home. Gulliver faints when his wife kisses him, buys two horses, and talks to them four hours a day.</p></li>
+          </ol>
+        </div>
+        <div>
+          <blockquote class="quote">
+            As soon as I entered the house, my wife took me in her arms, and kissed me; at which, having not been used to the touch of that odious animal for so many years, I fell into a swoon for almost an hour.
+            <cite>Gulliver, returning home in 1715 · Part IV, Ch. 11</cite>
+          </blockquote>
+          <div class="card">
+            <h4>Is Gulliver right at the end?</h4>
+            <p>This is the big debate about the book. Gulliver now thinks humans are just Yahoos and worships the horses. But look at the clues Swift leaves:</p>
+            <ul style="padding-left:1.1em;margin:0">
+              <li><b>Pedro de Mendez</b> is generous and kind, a human who is <i>nothing</i> like a Yahoo. Gulliver can barely stand to talk to him.</li>
+              <li>The Houyhnhnms are wise, but cold. They plan to wipe out the Yahoos, and they banish Gulliver even though he's done nothing wrong.</li>
+              <li>Gulliver ends up talking to horses in a stable, which is comic in its own way.</li>
+            </ul>
+            <p style="margin-top:12px">Many readers think Swift is warning us twice: humans <i>are</i> proud and vicious, but trying to be a cold, perfect Houyhnhnm is impossible for us, and hating everyone is its own kind of pride.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-block" data-section="p4"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONNECTIONS ======================= -->
+<section class="block" id="connections">
+  <div class="wrap">
+    <div class="section-head prose">
+      <div class="eyebrow">Putting it all together</div>
+      <h2>How the four voyages connect</h2>
+      <p class="lede">The four parts can read like separate adventures, but Swift built them as a set. Each one shows humanity from a new angle, and each one leaves Gulliver less proud of being human.</p>
+    </div>
+
+    <!-- Big comparison matrix -->
+    <div class="table-scroll">
+      <table class="matrix">
+        <thead><tr><th></th><th>I · Lilliput</th><th>II · Brobdingnag</th><th>III · Laputa etc.</th><th>IV · Houyhnhnms</th></tr></thead>
+        <tbody>
+          <tr><th>Gulliver is…</th><td>A giant</td><td>A tiny toy</td><td>Normal size, but ignored</td><td>An animal (a "Yahoo")</td></tr>
+          <tr><th>How he gets stranded</th><td>Storm and shipwreck</td><td>Abandoned by shipmates</td><td>Captured by pirates</td><td>His own crew mutinies</td></tr>
+          <tr><th>The locals are</th><td>Tiny, proud, petty</td><td>Huge, coarse, but wise</td><td>Clever, impractical</td><td>Reasonable horses; beastly humans</td></tr>
+          <tr><th>Swift mocks</th><td>Politics, war and religious squabbles</td><td>English pride and corruption</td><td>Science, "experts," history, dreams of immortality</td><td>Human nature itself</td></tr>
+          <tr><th>Who judges humanity</th><td>(Gulliver judges them)</td><td>The giant king</td><td>Ghosts of history</td><td>His Houyhnhnm master</td></tr>
+          <tr><th>Big lesson</th><td>Pride looks silly from far away</td><td>Up close, we're not so great</td><td>Brains without common sense are useless</td><td>Humans misuse reason to do evil</td></tr>
+          <tr><th>Returning home</th><td>Shows off tiny sheep for money</td><td>Thinks everyone is a pygmy; stoops at doors</td><td>Fairly normal, then leaves again</td><td>Can't stand humans; lives with horses</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Disaster ladder -->
+    <div class="grid-2" style="margin-top:72px; align-items:end">
+      <div class="prose">
+        <div class="eyebrow">Pattern 1</div>
+        <h3>The disaster ladder</h3>
+        <p>Look at <i>what</i> strands Gulliver each time. It starts with nature and gets more and more human, ending with his own men turning against him.</p>
+        <p>By the time he meets the Yahoos, the book has been quietly building its case: the biggest danger to humans is other humans.</p>
+      </div>
+      <div>
+        <div class="ladder">
+          <div class="step l1"><small>Voyage I</small><b>A storm</b><span>nature</span></div>
+          <div class="step l2"><small>Voyage II</small><b>Deserted</b><span>by shipmates</span></div>
+          <div class="step l3"><small>Voyage III</small><b>Pirates</b><span>by strangers</span></div>
+          <div class="step l4"><small>Voyage IV</small><b>Mutiny</b><span>by his own crew</span></div>
+        </div>
+        <div class="ladder-axis"><span>Accident</span><span>Betrayal →</span></div>
+      </div>
+    </div>
+
+    <!-- Pride chart -->
+    <div class="grid-2" style="margin-top:72px">
+      <figure class="figure">
+        <svg viewBox="0 0 520 320" role="img" aria-labelledby="pride-t">
+          <title id="pride-t">Line showing Gulliver's opinion of humankind falling across the four voyages</title>
+          <g font-family="Inter" font-size="11.5" fill="#4b5670">
+            <line x1="70" y1="40" x2="70" y2="250" stroke="#222e50" stroke-width="1.5"/>
+            <line x1="70" y1="250" x2="500" y2="250" stroke="#222e50" stroke-width="1.5"/>
+            <line x1="70" y1="145" x2="500" y2="145" stroke="#222e50" stroke-opacity=".12" stroke-dasharray="4 4"/>
+            <text x="62" y="50" text-anchor="end">Proud</text>
+            <text x="62" y="149" text-anchor="end">Unsure</text>
+            <text x="62" y="250" text-anchor="end">Disgusted</text>
+            <text x="90" y="272" text-anchor="middle">Start</text>
+            <text x="190" y="272" text-anchor="middle">After I</text>
+            <text x="290" y="272" text-anchor="middle">After II</text>
+            <text x="390" y="272" text-anchor="middle">After III</text>
+            <text x="480" y="272" text-anchor="middle">After IV</text>
+          </g>
+          <path d="M90 55 L190 62 L290 125 L390 160 L480 240" fill="none" stroke="#426b69" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <g>
+            <circle cx="90" cy="55" r="7" fill="#222e50"/>
+            <circle cx="190" cy="62" r="7" fill="#8bb174"/>
+            <circle cx="290" cy="125" r="7" fill="#b5ca8d" stroke="#222e50"/>
+            <circle cx="390" cy="160" r="7" fill="#426b69"/>
+            <circle cx="480" cy="240" r="7" fill="#2a4849"/>
+          </g>
+          <g font-family="Inter" font-size="11" fill="#222e50" font-weight="600">
+            <text x="200" y="50">still sure England is best</text>
+            <text x="300" y="112">the king's "vermin" verdict</text>
+            <text x="378" y="186" text-anchor="end">experts &amp; history fail him</text>
+            <text x="468" y="236" text-anchor="end">"Yahoos!"</text>
+          </g>
+          <text x="285" y="305" text-anchor="middle" font-family="Inter" font-size="11" fill="#4b5670" font-style="italic">An interpretation, not a measurement</text>
+        </svg>
+      </figure>
+      <div class="prose">
+        <div class="eyebrow">Pattern 2</div>
+        <h3>Gulliver's pride, slowly falling</h3>
+        <p>At the start, Gulliver is sure England is the best country on earth. In Lilliput he's still confident, even superior.</p>
+        <p>In <b>Brobdingnag</b>, the giant king's verdict is the first crack. In <b>Part III</b>, the experts, the ghosts of history and the miserable immortals take more of his faith in human cleverness. In the <b>Houyhnhnm</b> land, the last of his pride is gone: he sees a Yahoo in the mirror.</p>
+        <p>That's the backbone of the whole book, and it's why the voyages are in this order.</p>
+      </div>
+    </div>
+
+    <!-- Mirrors -->
+    <div style="margin-top:72px">
+      <div class="eyebrow">Pattern 3</div>
+      <h3>Two pairs of mirrors</h3>
+      <p class="prose muted">An easy way to remember the structure: the four parts come in two matched pairs.</p>
+      <div class="grid-2" style="margin-top:18px">
+        <div class="mirror-pair">
+          <div class="card" style="border-top:4px solid var(--v1)"><h4>Lilliput</h4><p class="small">Gulliver is big. The people are small <b>in body and in mind</b>.</p></div>
+          <div class="mid" aria-hidden="true">⇄</div>
+          <div class="card" style="border-top:4px solid var(--v2)"><h4>Brobdingnag</h4><p class="small">Gulliver is small. The king is big <b>in body and in mind</b>.</p></div>
+        </div>
+        <div class="mirror-pair">
+          <div class="card" style="border-top:4px solid var(--v3)"><h4>Laputa</h4><p class="small">People who <b>think too much</b> and are useless at living.</p></div>
+          <div class="mid" aria-hidden="true">⇄</div>
+          <div class="card" style="border-top:4px solid var(--v4)"><h4>Houyhnhnms</h4><p class="small">Creatures of <b>perfect reason</b>, but cold, and impossible for a human to become.</p></div>
+        </div>
+      </div>
+      <p class="prose muted" style="margin-top:16px">Pair one is about <b>size and perspective</b>. Pair two is about <b>reason</b>: bad reason (Laputa) and perfect reason (Houyhnhnms). Humans fail at both ends.</p>
+    </div>
+
+    <!-- Recurring patterns -->
+    <div class="grid-2" style="margin-top:72px">
+      <div class="prose">
+        <div class="eyebrow">Pattern 4</div>
+        <h3>The same five steps, every voyage</h3>
+        <p>Once you see this rhythm, you can retell any part of the book.</p>
+        <div class="callout"><strong>Memory hook</strong>"<b>L</b>ittle, <b>B</b>ig, <b>B</b>rainy, <b>B</b>easts": Lilliput, Brobdingnag, Laputa, Houyhnhnms.</div>
+      </div>
+      <ol class="pattern-list">
+        <li><div class="ico">1</div><div><h4>Disaster at sea</h4><p>Something goes wrong and he lands somewhere unknown.</p><div class="dots"><span class="d1">I</span><span class="d2">II</span><span class="d3">III</span><span class="d4">IV</span></div></div></li>
+        <li><div class="ico">2</div><div><h4>He learns the language</h4><p>Gulliver is always a fast learner, and it's how he gets to know each society.</p><div class="dots"><span class="d1">I</span><span class="d2">II</span><span class="d3">III</span><span class="d4">IV</span></div></div></li>
+        <li><div class="ico">3</div><div><h4>He explains England to a ruler</h4><p>He describes Europe proudly to the giant king, and later honestly to his horse master. Both are appalled, and the second verdict is even harsher.</p><div class="dots"><span class="d2">II</span><span class="d4">IV</span></div></div></li>
+        <li><div class="ico">4</div><div><h4>He has to escape or is sent away</h4><p>Treason charges, an eagle, no ship available, banishment by the assembly.</p><div class="dots"><span class="d1">I</span><span class="d2">II</span><span class="d3">III</span><span class="d4">IV</span></div></div></li>
+        <li><div class="ico">5</div><div><h4>He struggles to fit back in at home</h4><p>Each country changes how he sees ordinary people, most of all after Part IV.</p><div class="dots"><span class="d2">II</span><span class="d4">IV</span></div></div></li>
+      </ol>
+    </div>
+
+    <div class="quiz-block" data-section="links"></div>
+  </div>
+</section>
+
+<!-- ======================= SCORE ======================= -->
+<section class="block dark" id="score">
+  <div class="wrap">
+    <div class="eyebrow">Your results</div>
+    <h2>Final score</h2>
+    <div class="score-hero" style="margin-top:28px">
+      <div class="ring">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="track" cx="60" cy="60" r="52" fill="none" stroke-width="12"/>
+          <circle class="meter" id="ring-meter" cx="60" cy="60" r="52" fill="none" stroke-width="12" stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="val"><div><b id="score-num">0</b><span id="score-of">out of 30</span></div></div>
+      </div>
+      <div>
+        <div class="rank" id="rank">Not started yet</div>
+        <p class="lede" id="rank-text">Answer the questions throughout the guide. Your score builds up here as you go.</p>
+        <div class="breakdown" id="breakdown"></div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+          <a class="btn" href="#gulliver" id="continue-btn">Go to first unanswered question</a>
+          <button class="btn ghost" type="button" id="reset-btn">Reset all answers</button>
+        </div>
+      </div>
+    </div>
+    <div class="missed" id="missed"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Built from the public-domain text of <i>Gulliver's Travels into Several Remote Nations of the World</i> by Jonathan Swift (1726), as published by Project Gutenberg (eBook #829). Quotations are from that text. Map positions and the "pride" chart are illustrations, not exact data.</p>
+    <p style="margin:0">Your answers are saved in this browser only.</p>
+  </div>
+</footer>
+
+<script src="quiz-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
