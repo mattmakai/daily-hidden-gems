@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const s = localStorage.getItem('color-scheme');
+      if (s === 'light' || s === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = s;
+      }
+    } catch {}
+  </script>
+  <title>Part III: Score, Sound &amp; 1977 Legacy | How Electromechanical Pinball Works</title>
+  <meta name="description" content="Mechanical score reels, Gottlieb's 3-bar aluminum chime box, the 00–90 Match unit, Replay vs. Add-a-Ball settings, and the documented history of Gottlieb's 1977 Solar City.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/core.js"></script>
+  <script type="module" src="js/part3-score.js"></script>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <a href="#main-heading" class="skip-link visually-hidden">Skip to article content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">77</span>
+        <span>EM Pinball: Solar City</span>
+      </a>
+
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <button
+            class="menu-button"
+            type="button"
+            popovertarget="site-menu"
+            popovertargetaction="toggle"
+            aria-controls="site-menu"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M2 4h12M2 8h12M2 12h12"/>
+            </svg>
+            <span>Chapters</span>
+          </button>
+
+          <ul id="site-menu" class="site-menu" popover="auto">
+            <li><a href="index.html"><span class="nav-part-num">I.</span> Playfield &amp; Action</a></li>
+            <li><a href="logic.html"><span class="nav-part-num">II.</span> The Brain Without a Chip</a></li>
+            <li><a href="score-and-legacy.html" aria-current="page"><span class="nav-part-num">III.</span> Score, Sound &amp; 1977 Legacy</a></li>
+          </ul>
+        </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          <span class="theme-option theme-option-light">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Light</span>
+            <span class="sr-only">Switch to light mode</span>
+          </span>
+          <span class="theme-option theme-option-dark">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Dark</span>
+            <span class="sr-only">Switch to dark mode</span>
+          </span>
+        </button>
+
+        <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span data-audio-label>Sound: Off</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <article>
+      <header class="article-hero">
+        <p class="chapter-kicker">Part III of III &middot; Score Reels, Chimes &amp; History</p>
+        <h1 id="main-heading" tabindex="-1">Score, Sound &amp; 1977 Legacy</h1>
+        <p class="hero-lead">
+          Electromechanical pinball machines displayed scores on spinning numbered drums behind illuminated glass, made sound by striking aluminum bars over a wooden resonance box, and signaled free games with a solenoid knocker against the cabinet wall. This final chapter covers those output mechanisms and the documented history of Gottlieb&rsquo;s 1977 <strong>Solar City</strong>.
+        </p>
+        <div class="article-meta">
+          <span>Score Reels &middot; 3-Bar Chime Box &middot; 00&ndash;90 Match</span>
+          <span>Gottlieb Model #393 &middot; February 1977</span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <h2>1. Mechanical Score Reels: Counting, Carrying, and Zeroing</h2>
+        <p>
+          Behind Gordon Morison&rsquo;s backglass on Solar City sit two horizontal rows of white numbered plastic drums&mdash;one bank for Player 1 and one for Player 2. Because Solar City scores in multiples of ten, the rightmost &ldquo;0&rdquo; is printed permanently on the backglass while four mechanical <strong>score reels</strong> per player display the <code>10s</code>, <code>100s</code>, <code>1,000s</code>, and <code>10,000s</code> digits (up to <code>99,990</code>, plus a 100,000 wrap-around lamp).
+        </p>
+        <p>
+          Each drum is stepped by a 25V AC solenoid pushing a hinged metal finger (a ratchet <strong>pawl</strong>), rotating the drum by exactly <strong>36 degrees</strong> (one-tenth of a turn) per pulse to advance from <code>0</code> through <code>9</code>. A three-switch stack on the side of every drum handles carry-over and game-start zeroing:
+        </p>
+        <ul>
+          <li><strong>9th-position carry switch:</strong> Stays open on digits <code>0</code>&ndash;<code>8</code> and closes only at <code>9</code>. On the next pulse, that closed switch energizes the next higher score relay (so the 10s reel at <code>9</code> trips the 100-point relay), cascading <code>09,990</code> + <code>10</code> cleanly across all four drums to <code>10,000</code>.</li>
+          <li><strong>Zero-position runout switch:</strong> Stays closed on digits <code>1</code>&ndash;<code>9</code> and drops open into a cam notch at <code>0</code>. At game start, Gottlieb&rsquo;s <code>Z1</code> reset relay pulses all four reels in each player&rsquo;s bank together through the score motor (four-player Gottliebs add a second <code>Z2</code> relay for Players 3 and 4). Each drum steps forward until it reaches <code>0</code>, opens its runout switch, and stops.</li>
+          <li><strong>Zero-position end-of-reset switch:</strong> Wired across every drum in series and closes only at <code>0</code>. Once every single reel reaches zero, this completed chain drops the <code>Z1</code> reset relay out so the game can serve Ball 1.</li>
+        </ul>
+      </div>
+
+      <!-- DIAGRAM 11: Mechanical Score Reels & X-Ray Carry Mechanism -->
+      <figure class="diagram-figure stage-breakout" id="fig-reels">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 11. 2-Player Score Reels, Cascade Carry &amp; Zero-Reset Mechanism</span>
+          <span class="diagram-badge">Try &ldquo;Set 09,990&rdquo; then +10</span>
+        </div>
+        <div class="diagram-canvas-wrap theme-cabinet">
+          <canvas id="d11-canvas" class="diagram-canvas" width="860" height="430" role="img" aria-label="Interactive Gottlieb 2-player mechanical score reel assembly showing four rotating score drums plus a painted zero per player above, and an X-ray side cutaway of the 100s drum ratchet pawl, 9-position carry-over switch, and 0-position reset notch switch below."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="btn-segmented" role="group" aria-label="Active player bank">
+            <button type="button" class="btn" id="d11-p1" aria-pressed="true">Player 1 Up</button>
+            <button type="button" class="btn" id="d11-p2" aria-pressed="false">Player 2 Up</button>
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn" id="d11-add-10">+10</button>
+            <button type="button" class="btn" id="d11-add-100">+100</button>
+            <button type="button" class="btn btn-primary" id="d11-add-300">+300 (Drop Target)</button>
+            <button type="button" class="btn" id="d11-add-1000">+1,000</button>
+            <button type="button" class="btn" id="d11-add-5000">+5,000</button>
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn btn-cobalt" id="d11-set-9990">Set 09,990 (Test Carry)</button>
+            <button type="button" class="btn" id="d11-reset-zero">Z1 Zero Reset</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Player 1: <strong id="d11-p1-score">00,000</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Player 2: <strong id="d11-p2-score">00,000</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d11-dot-carry" aria-hidden="true"></span>100s Drum Switches: <strong id="d11-sw-status">Zero Notch OPEN &middot; 9-Carry OPEN</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Switch between Player 1 and Player 2 to see how the backbox Player Unit routes pulses to each drum bank. Click <strong>Set 09,990</strong> then <strong>+10</strong> to trace the 9th-position carry across all four drums, then click <strong>Z1 Zero Reset</strong> to watch each drum halt at its zero notch.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>2. The Chime Box, 00&ndash;90 Match Unit, and Replay Conversion</h2>
+        <p>
+          Before electronic sound boards arrived in 1978, Gottlieb machines produced sound using a <strong>three-bar chime unit</strong> (Gottlieb assembly <code>B-12023</code>) bolted to the inner right cabinet wall. Three cut aluminum tone bars (<code>A-12016/17/18</code>) rest on soft rubber-or-foam rings (grommets) above a multi-chambered wooden resonance box sized for each note. Underneath each bar sits a vertical 25V AC solenoid wired alongside the matching score relay:
+        </p>
+        <ul>
+          <li><strong>10-point bar (low tone):</strong> Rings on rollover switches, rubber rebounds, and slingshots.</li>
+          <li><strong>100-point bar (mid tone):</strong> Rings on pop bumpers and pulses three times on every 300-point drop target hit.</li>
+          <li><strong>1,000-point bar (high tone):</strong> Rings on every tick of the end-of-ball bonus countdown and five times on the lit 5,000-point top lane.</li>
+        </ul>
+        <p>
+          At Game Over, the backbox reveals the <strong>00&ndash;90 Match Unit</strong>&mdash;a hidden 10-position rotary stepper that advances during gameplay (driven by the 10-point scoring relay) rather than spinning at the end. When the final ball drains, the backglass lights the Match digit (<code>00</code> through <code>90</code>) where that wiper happened to stop. In Replay mode, if it matches the last two digits of your final score, the <strong>replay knocker</strong> fires a steel plunger into a cabinet bracket with a sharp crack and adds one free game to the credit wheel.
+        </p>
+        <p>
+          Gottlieb&rsquo;s 1977 Solar City sales flyer promoted operator conversion between <strong>Replay</strong> and <strong>Add-a-Ball</strong> operation. Where local laws banned arcades from awarding free games, operators could move a rectangular multi-pin jumper plug (a <strong>Jones plug</strong>) in the backbox so a lit playfield <strong>Special</strong> (the table&rsquo;s top award) granted an <strong>Extra Ball</strong> during play instead of a free credit&mdash;while switching off the end-of-game Replay Match.
+        </p>
+      </div>
+
+      <!-- DIAGRAM 12: Acoustic Chime Box + 00-90 Match Unit & Replay/Add-a-Ball -->
+      <figure class="diagram-figure stage-breakout" id="fig-chime-match">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 12. 3-Bar Aluminum Chime Box, 00&ndash;90 Match Unit &amp; Operator Plug</span>
+          <span class="diagram-badge">Enable Sound in header to hear chimes</span>
+        </div>
+        <div class="diagram-canvas-wrap theme-cabinet">
+          <canvas id="d12-canvas" class="diagram-canvas" width="860" height="415" role="img" aria-label="Interactive Gottlieb 3-bar aluminum chime box over a hollow wood resonator with replay knocker on the left, paired with the 00 to 90 Match rotary stepper and Replay versus Add-a-Ball operator plug on the right."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn" id="d12-chime-10">Strike 10-pt (Low)</button>
+            <button type="button" class="btn" id="d12-chime-100">Strike 100-pt (Mid)</button>
+            <button type="button" class="btn" id="d12-chime-1000">Strike 1,000-pt (High)</button>
+            <button type="button" class="btn" id="d12-chord">Play 300-pt Triple Chime</button>
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d12-match-spin">Advance &amp; Check 00&ndash;90 Match</button>
+            <button type="button" class="btn btn-cobalt" id="d12-match-win">Demo Match Win (Fire Knocker)</button>
+            <button type="button" class="btn" id="d12-plug" aria-pressed="false">Mode: Replay (Free Game)</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Player Score End: <strong id="d12-player-end">70</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Match Wheel: <strong id="d12-match-num">40</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d12-dot-award" aria-hidden="true"></span>Result: <strong id="d12-result">Click bars to ring chimes, or test the 00&ndash;90 Match unit.</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Turn <strong>Sound: On</strong> in the top bar and strike any bar (or click directly on the canvas) to hear synthesized aluminum chime overtones and the cabinet knocker. The Match control advances the stepper to simulate in-game 10-point stepping before revealing the resting digit; flip the operator plug to compare Replay and Add-a-Ball award setups (note that on a real machine, Game Over Match is disabled in Add-a-Ball mode and Extra Balls are awarded mid-game).
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <hr>
+        <h2>3. Case Study: Gottlieb&rsquo;s Solar City (February 1977)</h2>
+        <p>
+          Released in <strong>February 1977</strong> by <strong>D. Gottlieb &amp; Co.</strong> from its Northlake, Illinois plant, Solar City (Model #393, Schematic #964, <a href="https://www.ipdb.org/machine.cgi?id=2237">Internet Pinball Database #2237</a>) dressed Ed Krynski&rsquo;s 15-target playfield in retro science-fantasy artwork by Gordon Morison&mdash;depicting futuristic domed towers and figures beneath radiant suns. It shipped right as microprocessor-based machines with calculator-style 7-segment digital displays began replacing relay tables.
+        </p>
+        <p>
+          Factory production archives cited on IPDB and <a href="https://pinside.com/pinball/machine/solar-city">Pinside</a> (a major pinball collector database and forum) record <strong>2,525 production machines</strong>, while the <a href="https://www.ipsnd.net/">Internet Pinball Serial Number Database (IPSND)</a> lists <strong>2,634</strong>. Restoration notes attribute the 109-unit difference to 109 pre-production sample machines built in 1976 alongside the 2,525-unit main run.
+        </p>
+      </div>
+
+      <!-- RESPONSIVE SPECIFICATIONS TABLE -->
+      <div class="stage-breakout">
+        <div tabindex="0" role="region" aria-labelledby="spec-table-caption" class="table-wrapper">
+          <table class="data-table">
+            <caption id="spec-table-caption">Original 1977 Gottlieb Solar City &mdash; Technical &amp; Historical Specifications</caption>
+            <thead>
+              <tr>
+                <th scope="col">Specification</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Release Date</th>
+                <td data-label="Details">February 1977 (50th anniversary: February 2027)</td>
+              </tr>
+              <tr>
+                <th scope="row">Manufacturer</th>
+                <td data-label="Details">D. Gottlieb &amp; Co. (Northlake, Illinois, USA)</td>
+              </tr>
+              <tr>
+                <th scope="row">Identifiers</th>
+                <td data-label="Details">Model #393 &middot; Schematic #964 &middot; IPDB #2237</td>
+              </tr>
+              <tr>
+                <th scope="row">Production Run</th>
+                <td data-label="Details">2,525 production units (IPDB / Pinside); 2,634 on IPSND (including 109 reported 1976 sample units)</td>
+              </tr>
+              <tr>
+                <th scope="row">Game Designer</th>
+                <td data-label="Details">Ed Krynski (Pinball Expo Hall of Fame, 2003)</td>
+              </tr>
+              <tr>
+                <th scope="row">Artwork</th>
+                <td data-label="Details">Gordon Alexander Morison, signed &ldquo;GAM&rdquo; (Pinball Expo Hall of Fame, 1998)</td>
+              </tr>
+              <tr>
+                <th scope="row">Players &amp; Price</th>
+                <td data-label="Details">1 or 2 players &middot; Original advertised play price: 25&cent;</td>
+              </tr>
+              <tr>
+                <th scope="row">Technology</th>
+                <td data-label="Details">Electromechanical (EM): 25V AC relays, 1/3-turn score motor, coils, 6.3V AC lamps, mechanical score reels</td>
+              </tr>
+              <tr>
+                <th scope="row">Playfield Hardware</th>
+                <td data-label="Details">4 flippers (two 3&Prime; lower, two 2&Prime; upper), 15 drop targets (10 upper + 5 right), 2 pop bumpers, 2 slingshots</td>
+              </tr>
+              <tr>
+                <th scope="row">Theme &amp; Conversion</th>
+                <td data-label="Details">Science fantasy &middot; Operator-adjustable Replay / Add-a-Ball configuration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="prose">
+        <h2>4. The Creators: Ed Krynski and Gordon Morison</h2>
+        <p>
+          Solar City paired Gottlieb&rsquo;s lead mechanical designer with its principal 1970s illustrator&mdash;both later inducted into the <a href="https://pinballexpo.com/">Pinball Expo Hall of Fame</a> and preserved in collections such as the <a href="https://www.pacificpinball.org/">Pacific Pinball Museum</a>.
+        </p>
+
+        <div class="creator-grid">
+          <section class="creator-card">
+            <p class="creator-role">Game Designer &middot; 1927&ndash;2004</p>
+            <h3 class="creator-name">Ed Krynski</h3>
+            <p>
+              Born September 12, 1927 in Illinois, Krynski served in the U.S. Navy during World War II and designed amusement games for J.H. Keeney &amp; Co. before joining Gottlieb around 1963. Succeeding Wayne Neyens as lead designer, he created <strong>more than 200 pinball machines</strong>, including <em>Royal Flush</em> (1976), <em>Sinbad</em> (1978), <em>Genie</em> (1979), <em>The Amazing Spider-Man</em> (1980), and his final table, <em>El Dorado: City of Gold</em> (1984).
+            </p>
+            <p>
+              Krynski emphasized aimed shots and drop-target sequences over random ball bounces. He retired from Gottlieb in 1984 and was inducted into the Pinball Expo Hall of Fame on October 18, 2003.
+            </p>
+          </section>
+
+          <section class="creator-card">
+            <p class="creator-role">Principal Artist &middot; 1930&ndash;2000</p>
+            <h3 class="creator-name">Gordon Alexander Morison</h3>
+            <p>
+              Born April 27, 1930 in Indiana, Morison served in the Korean War and trained at Chicago&rsquo;s Advertising Posters Company. Following longtime Gottlieb artist Roy Parker (1899&ndash;1966) and his immediate successor Art Stenholm, Morison served as Gottlieb&rsquo;s principal artist from 1971 (<em>Galaxie</em>) through 1980 (<em>Asteroid Annie and the Aliens</em>), illustrating roughly <strong>137 machines</strong>&mdash;including <em>Cleopatra</em> (1977), <em>Genie</em> (1979), and <em>Totem</em> (1979)&mdash;signed with his initials &ldquo;GAM.&rdquo;
+            </p>
+            <p>
+              After leaving pinball, he illustrated comics including <em>Slimer! and the Real Ghostbusters</em> for NOW Comics. He was inducted into the Pinball Expo Hall of Fame on October 24, 1998.
+            </p>
+          </section>
+        </div>
+
+        <div tabindex="0" role="region" aria-labelledby="krynski-table-caption" class="table-wrapper">
+          <table class="data-table">
+            <caption id="krynski-table-caption">Ed Krynski&rsquo;s Signature Playfield Mechanisms</caption>
+            <thead>
+              <tr>
+                <th scope="col">Year</th>
+                <th scope="col">Machine</th>
+                <th scope="col">Playfield Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1965</th>
+                <td data-label="Machine"><em>Bank-A-Ball</em></td>
+                <td data-label="Playfield Mechanism">Return inlanes (side channels guiding the ball smoothly to the flippers for aimed shots)</td>
+              </tr>
+              <tr>
+                <th scope="row">1966</th>
+                <td data-label="Machine"><em>Dancing Lady</em></td>
+                <td data-label="Playfield Mechanism">Carousel Roto-Target (building on Wayne Neyens&rsquo;s 1957 <em>Majestic</em> disk Roto-Target)</td>
+              </tr>
+              <tr>
+                <th scope="row">1969</th>
+                <td data-label="Machine"><em>Airport</em></td>
+                <td data-label="Playfield Mechanism">Vari-Target (spring-loaded sliding target that scores higher on harder hits)</td>
+              </tr>
+              <tr>
+                <th scope="row">1971</th>
+                <td data-label="Machine"><em>2001</em> / <em>Galaxie</em></td>
+                <td data-label="Playfield Mechanism">Large multi-target banks of mechanical drop targets</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>5. The Seven-Machine El Dorado Family Tree</h2>
+        <p>
+          Solar City&rsquo;s 15-target, 4-flipper playfield debuted in the single-player Western table <strong>El Dorado</strong> (1975). Gottlieb reused that playfield across <strong>seven titles over nine years</strong>&mdash;covering single-player, two-player, four-player, Add-a-Ball, export, and promotional editions&mdash;before reviving it in 1984 as the microprocessor-based (Gottlieb System 80A) table <em>El Dorado: City of Gold</em>.
+        </p>
+      </div>
+
+      <!-- INTERACTIVE 7-MACHINE FAMILY TREE EXPLORER -->
+      <figure class="diagram-figure stage-breakout" id="fig-family">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 13. The El Dorado &rarr; Solar City Playfield Family (1975&ndash;1984)</span>
+          <span class="diagram-badge">Select any of the 7 sibling machines</span>
+        </div>
+        <div class="family-grid" id="family-grid" role="group" aria-label="Seven machines sharing the El Dorado playfield layout"></div>
+        <div class="family-detail" id="family-detail" aria-live="polite">
+          <div class="family-detail-head">
+            <h3 class="family-detail-title" id="fam-title">Solar City (1977)</h3>
+            <span class="diagram-badge" id="fam-era">Electromechanical &middot; 2 Players</span>
+          </div>
+          <p id="fam-desc"></p>
+          <div class="family-pills" id="fam-pills"></div>
+        </div>
+        <figcaption class="diagram-caption">
+          Select any machine in the seven-title family to compare how Gottlieb adapted Ed Krynski&rsquo;s 15-target layout for single-player, multiplayer, Add-a-Ball, export, promotional, and solid-state markets.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>6. Gottlieb&rsquo;s 1977 Turning Point</h2>
+        <p>
+          By the time Solar City shipped in February 1977, D. Gottlieb &amp; Co. was closing fifty years of family ownership. Columbia Pictures had agreed to acquire the company in December 1976 (completing the purchase in early 1977), kicking off an industry-wide shift from relay-wired electromechanical games toward microprocessor circuit boards and licensed pop-culture themes.
+        </p>
+
+        <ol class="timeline" aria-label="Gottlieb company historical timeline from 1927 to 1996">
+          <li class="timeline-item">
+            <span class="timeline-year">1927</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">D. Gottlieb &amp; Co. Founded</div>
+              <p>David Gottlieb launches his amusement machine company in Chicago, Illinois.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1931</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading"><em>Baffle Ball</em></div>
+              <p>Coin-operated countertop pinball spreads rapidly across the United States during the Great Depression.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1947</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading"><em>Humpty Dumpty</em> &mdash; First Player Flippers</div>
+              <p>Harry Mabs&rsquo;s player-controlled electromechanical flippers shift pinball from chance to skill.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1963&ndash;72</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">EM Expansion &amp; Northlake Plant</div>
+              <p>Ed Krynski joins around 1963, Gordon Morison becomes principal artist in 1971, and Gottlieb relocates production from Chicago to Northlake, Illinois in 1972.</p>
+            </div>
+          </li>
+          <li class="timeline-item is-highlight">
+            <span class="timeline-year">1976&ndash;77</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">Columbia Pictures Acquisition &amp; <em>Solar City</em></div>
+              <p>Columbia Pictures agrees to acquire Gottlieb in December 1976 (closing in early 1977). Solar City ships in February 1977 near the end of Gottlieb&rsquo;s pure EM production.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1982&ndash;83</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">Coca-Cola / Mylstar Electronics</div>
+              <p>Coca-Cola acquires Columbia Pictures (1982) and renames the coin-op division Mylstar Electronics (1983).</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1984</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">Mylstar Shutdown, Premier Technology &amp; Krynski&rsquo;s Departure</div>
+              <p><em>El Dorado: City of Gold</em> launches across the handover (early samples under Mylstar in September; main run under Premier Technology after its October purchase of Mylstar&rsquo;s pinball assets), and Ed Krynski retires.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-year">1996</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <div class="timeline-body">
+              <div class="timeline-heading">End of Manufacturing</div>
+              <p>Premier Technology closes operations, ending nearly seventy years of Gottlieb-branded pinball manufacturing.</p>
+            </div>
+          </li>
+        </ol>
+
+        <h2>7. Collectibility and Market Snapshot</h2>
+        <p>
+          Approaching its 50th anniversary in February 2027, Solar City trades in the lower-to-mid price tier for 1970s electromechanical machines. Below is a collector market snapshot recorded from Pinside and IPSND as of November 2026:
+        </p>
+
+        <div class="stat-grid" aria-label="Solar City collector market snapshot as of November 2026">
+          <div class="stat-card">
+            <div class="stat-label">Market Estimate</div>
+            <div class="stat-value">$920&ndash;$1,080</div>
+            <div class="stat-note">Pinside estimate, Nov 2026</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Median Asking</div>
+            <div class="stat-value">$1,000</div>
+            <div class="stat-note">Pinside listings, Nov 2026</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Collector Rating</div>
+            <div class="stat-value">7.8 / 10</div>
+            <div class="stat-note">Pinside community score</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Registered Serials</div>
+            <div class="stat-value">54</div>
+            <div class="stat-note">IPSND / Pinside, Nov 2026</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Original Release</div>
+            <div class="stat-value">Feb 1977</div>
+            <div class="stat-note">50th anniversary: Feb 2027</div>
+          </div>
+        </div>
+
+        <p>
+          No complete census exists for surviving Solar City cabinets; the 54 registered serial numbers reflect voluntary owner submissions rather than the total surviving count. Condition drives pricing heavily after nearly five decades: flaking on Morison&rsquo;s silkscreened (ink-printed) backglass, playfield wear, chipped exterior paint (originally applied with factory cabinet stencils), and worn relay contacts separate project machines from restored examples selling well above baseline estimates. Owners can log and compare stamped cabinet serial numbers via <a href="https://www.ipsnd.net/">IPSND</a> and <a href="https://pinside.com/pinball/machine/solar-city">Pinside</a>.
+        </p>
+
+        <h3 id="sources">Sources &amp; Further Reading</h3>
+        <p>
+          Technical schematics, production counts, repair notes, and biographies in this guide draw from the following pinball archives and references:
+        </p>
+        <ul>
+          <li><a href="https://www.ipdb.org/machine.cgi?id=2237">Internet Pinball Database (IPDB) &mdash; <em>Solar City</em> (#2237)</a> &mdash; Specifications, El Dorado playfield family records, and Gottlieb&rsquo;s 1977 sales flyer.</li>
+          <li><a href="https://pinside.com/pinball/machine/solar-city">Pinside &mdash; <em>Solar City</em> Machine Archive &amp; Registry</a> &mdash; Community ratings, market estimates, owner serial registry, and restoration discussions.</li>
+          <li><a href="https://www.ipsnd.net/">Internet Pinball Serial Number Database (IPSND)</a> &mdash; Owner-submitted serial number database tracking surviving Gottlieb machines (site homepage; search for &ldquo;Solar City&rdquo;).</li>
+          <li><a href="https://www.pacificpinball.org/">Pacific Pinball Museum</a> &mdash; Preservation archives documenting 1970s Gottlieb artwork by Gordon Morison and playfield design by Ed Krynski (site homepage).</li>
+          <li><a href="https://www.pinwiki.com/wiki/index.php/EM_Repair">PinWiki &mdash; Electromechanical (EM) Repair Guide</a> &mdash; Technical documentation on Gottlieb 25V AC circuits, 120&deg; score motors, dual-wound flipper EOS switches, and coin-door safety.</li>
+          <li><a href="https://www.pinrepair.com/em/">PinRepair &mdash; Clay Harrell&rsquo;s EM Pinball Repair Guide</a> &mdash; Step-by-step diagnostics for Gottlieb score motors, relays, stepper units, and mechanical score reels.</li>
+          <li><a href="https://pinballexpo.com/">Pinball Expo Hall of Fame</a> &mdash; Official organization homepage documenting Hall of Fame inductions for Gordon Morison (1998) and Ed Krynski (2003).</li>
+        </ul>
+      </div>
+
+      <nav class="chapter-pager" aria-label="Chapter navigation">
+        <a class="pager-link" href="logic.html">
+          <span class="pager-dir">&larr; Previous Chapter</span>
+          <span class="pager-title">Part II: The Brain Without a Chip</span>
+          <span class="pager-sub">25V AC bus, relays, Gottlieb score motor, Bonus Unit &amp; tilt physics</span>
+        </a>
+        <a class="pager-link pager-next" href="index.html">
+          <span class="pager-dir">Start Over &circlearrowleft;</span>
+          <span class="pager-title">Part I: Playfield &amp; Action</span>
+          <span class="pager-sub">Return to Solar City&rsquo;s playfield cutaway, plunger, flippers &amp; drop targets</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>How Electromechanical Pinball Works</strong> &middot; Reference: Gottlieb <em>Solar City</em> (1977)
+      </div>
+      <div>
+        Part III: Score, Sound &amp; 1977 Legacy &middot; <a href="#sources">Sources &amp; Credits</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

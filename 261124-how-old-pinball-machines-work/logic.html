@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const s = localStorage.getItem('color-scheme');
+      if (s === 'light' || s === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = s;
+      }
+    } catch {}
+  </script>
+  <title>Part II: The Brain Without a Chip | How Electromechanical Pinball Works</title>
+  <meta name="description" content="How 1970s Gottlieb electromechanical pinball machines execute game logic using step-down transformers, leaf-switch relays, the 1/3-revolution score motor, stepper units, and tilt pendulums.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/core.js"></script>
+  <script type="module" src="js/part2-logic.js"></script>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <a href="#main-heading" class="skip-link visually-hidden">Skip to article content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">77</span>
+        <span>EM Pinball: Solar City</span>
+      </a>
+
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <button
+            class="menu-button"
+            type="button"
+            popovertarget="site-menu"
+            popovertargetaction="toggle"
+            aria-controls="site-menu"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M2 4h12M2 8h12M2 12h12"/>
+            </svg>
+            <span>Chapters</span>
+          </button>
+
+          <ul id="site-menu" class="site-menu" popover="auto">
+            <li><a href="index.html"><span class="nav-part-num">I.</span> Playfield &amp; Action</a></li>
+            <li><a href="logic.html" aria-current="page"><span class="nav-part-num">II.</span> The Brain Without a Chip</a></li>
+            <li><a href="score-and-legacy.html"><span class="nav-part-num">III.</span> Score, Sound &amp; 1977 Legacy</a></li>
+          </ul>
+        </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          <span class="theme-option theme-option-light">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Light</span>
+            <span class="sr-only">Switch to light mode</span>
+          </span>
+          <span class="theme-option theme-option-dark">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Dark</span>
+            <span class="sr-only">Switch to dark mode</span>
+          </span>
+        </button>
+
+        <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span data-audio-label>Sound: Off</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <article>
+      <header class="article-hero">
+        <p class="chapter-kicker">Part II of III &middot; Relays, Cams &amp; Steppers</p>
+        <h1 id="main-heading" tabindex="-1">The Brain Without a Chip</h1>
+        <p class="hero-lead">
+          Bolted to a removable plywood board in the bottom of Gottlieb&rsquo;s 1977 <strong>Solar City</strong> sits the entire control system: an iron transformer, rows of electromagnetic relays, a rotating cam motor, and ratcheting stepper counters. Together they enforce every game rule, reset cycle, bonus multiplier, and tilt lockout using alternating current and moving switches.
+        </p>
+        <div class="article-meta">
+          <span>Gottlieb Wiring Schematic #964</span>
+          <span>25V AC Coils &middot; 6.3V AC Lamps &middot; 1/3-Turn Score Motor</span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p>
+          Each cabinet assembly performs one clear job (documented in Gottlieb&rsquo;s fold-out factory wiring blueprint, Schematic #964, and EM repair guides from <a href="https://www.pinwiki.com/wiki/index.php/EM_Repair">PinWiki</a> and <a href="https://www.pinrepair.com/em/">PinRepair</a>):
+        </p>
+        <ul>
+          <li><strong>Step-down transformer:</strong> Lowers 120V wall power into safe, electrically separated lamp and coil power lines (buses).</li>
+          <li><strong>Relays:</strong> Electromagnet-driven switches that route current and latch on/off states.</li>
+          <li><strong>Score motor:</strong> A timed mechanical sequencer that turns one switch hit into spaced bursts of pulses.</li>
+          <li><strong>Stepper units:</strong> Ratcheting rotary counters that track player turns, ball count, and bonus totals.</li>
+        </ul>
+
+        <h2>1. Power Distribution: 120V AC to 25V and 6.3V AC</h2>
+        <p>
+          A laminated-iron <strong>step-down transformer</strong> bolted to the rear cabinet floor takes standard 120V AC (60&nbsp;Hz) North American wall power on its <strong>primary</strong> winding and steps it down into two isolated <strong>secondary</strong> circuits. Both stay alternating current (AC), because incandescent bulbs and coils work directly on AC without rectifiers (circuits that convert AC to DC). Slow-blow <strong>fuses</strong> guard each line so a stuck coil blows a fuse instead of cooking the transformer:
+        </p>
+        <ul>
+          <li><strong>6.3V AC lighting bus:</strong> Powers the #44 and #47 incandescent bulbs behind Gordon Morison&rsquo;s backglass, inside pop bumper caps, and beneath translucent plastic playfield windows (called <strong>inserts</strong>).</li>
+          <li><strong>25V AC coil and logic bus</strong> (typically reading ~24&ndash;25V AC under load): Powers flippers, pop bumpers, drop-target resets, relays, score reels, stepper units, chimes, and the score motor.</li>
+        </ul>
+        <p>
+          Flipping the cabinet power switch energizes the transformer, but backglass and playfield lamps stay dark until the <strong>H (Hold) Relay</strong>&mdash;an electromagnetic switch wired to hold itself closed once triggered, covered in Section 2&mdash;latches on when you press Start. Its coil circuit passes through normally closed anti-cheat <strong>slam switches</strong> on the coin door and cabinet floor: kicking the door momentarily bounces a slam switch open, cutting power so the Hold Relay drops out and ends the game.
+        </p>
+        <details class="tech-note">
+          <summary>Restoration safety note: 120V AC on Gottlieb coin-door switches</summary>
+          <p>
+            Figure 6 simplifies the Hold Relay loop onto the low-voltage schematic bus for readability. In real 1970s Gottlieb EMs, <a href="https://www.pinwiki.com/wiki/index.php/EM_Repair">PinWiki</a> and <a href="https://www.pinrepair.com/em/">PinRepair</a> warn that live <strong>120V AC line voltage</strong> often runs directly to coin-door slam and start switches behind thin cardboard-like insulating sheets (<em>fish paper</em>). Always unplug a real machine before servicing the coin door.
+          </p>
+        </details>
+      </div>
+
+      <!-- DIAGRAM 6: Transformer & Dual Voltage Power Bus -->
+      <figure class="diagram-figure stage-breakout" id="fig-power">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 6. Step-Down Transformer, Fuses &amp; Hold Relay Bus</span>
+          <span class="diagram-badge">Toggle switches to trace AC power</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d6-canvas" class="diagram-canvas" width="860" height="360" role="img" aria-label="Interactive electrical schematic of a Gottlieb EM pinball transformer stepping 120V AC down to 6.3V AC lighting and 25V AC solenoid buses through slow-blow fuses, a normally closed slam switch, and the Hold Relay."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d6-power" aria-pressed="true">Cabinet Power: ON</button>
+            <button type="button" class="btn btn-cobalt" id="d6-hold" aria-pressed="true">Engage Hold Relay (H)</button>
+            <button type="button" class="btn" id="d6-slam">Trip Slam Switch (Bounce Open)</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-active" id="d6-dot-pri" aria-hidden="true"></span>Primary: <strong id="d6-pri">120V AC (60 Hz)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" id="d6-dot-lamp" aria-hidden="true"></span>Lighting Bus: <strong id="d6-lamp">6.3V AC &mdash; Lamps Lit</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" id="d6-dot-sol" aria-hidden="true"></span>Logic/Coil Bus: <strong id="d6-sol">25V AC &mdash; Hold Relay Latched</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Toggle cabinet power, the Hold Relay, and the Slam Switch. Bouncing the normally closed Slam Switch open cuts current to the Hold Relay coil long enough for it to drop out and shut off the active game.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>2. Relays: Leaf-Switch Logic and 1-Bit Memory</h2>
+        <p>
+          A Gottlieb <strong>relay</strong> pairs a copper electromagnet coil with a hinged steel plate (the <strong>armature</strong>) that pushes a notched strip of <strong>Bakelite</strong> (hard, heat-resistant insulating plastic) across a stack of springy nickel-silver <strong>leaf switches</strong>. When 25V AC energizes the coil, the armature snaps down and flips every switch in its stack at once (labeled <code>A</code>, <code>B</code>, and <code>C</code> on Gottlieb schematics):
+        </p>
+        <ul>
+          <li><strong>Normally Open (N.O. / Make &ldquo;A&rdquo;):</strong> Separated (off) at rest; closes to carry current when energized.</li>
+          <li><strong>Normally Closed (N.C. / Break &ldquo;B&rdquo;):</strong> Touching (on) at rest; opens to cut current when energized.</li>
+          <li><strong>Make/Break Changeover (&ldquo;C&rdquo;):</strong> Connects one wire path at rest and flips to an alternate path when energized.</li>
+        </ul>
+        <p>
+          Wiring one of a relay&rsquo;s own Normally Open switches back to its coil creates a <strong>self-holding (lock-in) circuit</strong>&mdash;a 1-bit mechanical memory cell. A brief pulse energizes the relay, and its own closed switch keeps feeding power to the coil until another switch elsewhere breaks the circuit (used for the <code>H</code> Hold, <code>S</code> Start, and <code>T</code> Tilt relays). For states that stay set for long stretches where constant coil current would overheat the winding&mdash;such as <code>Q</code> Game Over, <code>AX</code> Reset Control, or <code>BX</code> Last Ball&mdash;Gottlieb used <strong>dual-coil latch/trip relays</strong>: a latch coil snaps a mechanical hook shut, and a separate trip coil later releases it.
+        </p>
+      </div>
+
+      <!-- DIAGRAM 7: Inside an Electromechanical Relay & Mechanical RAM -->
+      <figure class="diagram-figure stage-breakout" id="fig-relay">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 7. Inside a Gottlieb Relay &mdash; Logic Switches &amp; 1-Bit Memory</span>
+          <span class="diagram-badge">Compare 3 relay wirings</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d7-canvas" class="diagram-canvas" width="860" height="410" role="img" aria-label="Interactive cutaway of a Gottlieb electromechanical relay showing the copper electromagnet coil, steel armature, Bakelite actuator comb, Normally Open, Normally Closed, and Changeover leaf switches, plus self-holding and dual-coil latch/trip modes."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="btn-segmented" role="group" aria-label="Relay wiring mode">
+            <button type="button" class="btn" id="d7-mode-momentary" aria-pressed="true">Momentary Relay</button>
+            <button type="button" class="btn" id="d7-mode-hold" aria-pressed="false">Self-Holding (Lock-In)</button>
+            <button type="button" class="btn" id="d7-mode-latch" aria-pressed="false">Dual-Coil Latch/Trip</button>
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d7-pulse">Pulse Input Coil</button>
+            <button type="button" class="btn" id="d7-release">Release / Trip Reset</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot" id="d7-dot-coil" aria-hidden="true"></span>Coil State: <strong id="d7-coil-state">De-energized</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d7-dot-mem" aria-hidden="true"></span>Stored Bit: <strong id="d7-mem-state">0 (At Rest)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Active Path: <strong id="d7-path-state">N.C. Closed &middot; N.O. Open</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Test all three relay wirings used in Solar City. In <strong>Self-Holding</strong> mode, one pulse locks the relay on through its own switch (like the <code>H</code> Hold and <code>S</code> Start relays). In <strong>Dual-Coil Latch/Trip</strong> mode, a mechanical hook keeps the bit stored with zero coil power.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>3. The Gottlieb Score Motor: Timed Multi-Pulse Sequencing</h2>
+        <p>
+          A mechanical score reel steps forward only one digit per electrical pulse. When a ball rolls through Solar City&rsquo;s lit <strong>5,000-point top lane</strong> or knocks down a <strong>300-point drop target</strong>, the machine must generate five or three evenly spaced pulses rather than one continuous jolt.
+        </p>
+        <p>
+          That timing comes from the <strong>Gottlieb Score Motor</strong>: a 25V AC geared electric motor (turning around 25&ndash;26&nbsp;RPM) bolted to the cabinet floor. Its vertical shaft spins stacked Bakelite <strong>cam discs</strong>&mdash;wheels cut with raised bumps (lobes) and notches that press against radial stacks of leaf switches arranged around the rim. On Gottlieb schematics, each switch is addressed by its stack position around the motor (<code>1</code>&ndash;<code>4</code>) and vertical level (<code>A</code>&ndash;<code>E</code>).
+        </p>
+        <p>
+          While Bally and Williams EM score motors cycle in 1/2-revolution (180&deg;) turns, every Gottlieb score motor divides one 360&deg; turn into <strong>three identical 120&deg; (1/3-revolution) cycles</strong>:
+        </p>
+        <ul>
+          <li><strong>Index / home switch (Motor 1C):</strong> At rest, switch <code>1C</code> drops into one of three deep notches at 0&deg;, 120&deg;, or 240&deg;, opening (cutting) motor power. When a scoring or start relay nudges the motor out of its notch, <code>1C</code> closes and powers the motor itself until it falls into the next notch 120&deg; later and stops.</li>
+          <li><strong>Impulse switch stacks (such as 1A):</strong> During one 120&deg; turn&mdash;roughly 0.8 seconds at 25&ndash;26&nbsp;RPM&mdash;five raised lobes on the impulse cam close switch <code>1A</code> five times for 500- or 5,000-point scores, while a separate three-impulse switch path fires three pulses for 300-point drop targets. Multi-step start resets simply keep running consecutive 1/3-turn cycles until reset relays confirm every score reel has reached zero.</li>
+        </ul>
+      </div>
+
+      <!-- DIAGRAM 8: Gottlieb Score Motor & Synchronized Timing Chart -->
+      <figure class="diagram-figure stage-breakout" id="fig-motor">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 8. Gottlieb Score Motor &mdash; 1/3-Revolution Cams &amp; Schematic Timing Chart</span>
+          <span class="diagram-badge">Trigger a cycle or hand-crank cams</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d8-canvas" class="diagram-canvas" width="860" height="445" role="img" aria-label="Interactive Gottlieb score motor showing rotating notched cam discs and switch positions (1C index switch, 1A five-pulse scoring switch, 2B reset switch, 4C serve switch) synchronized with a live 0 to 360 degree schematic timing chart."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d8-score-500">Score 500 pts (One 120&deg; Turn)</button>
+            <button type="button" class="btn btn-cobalt" id="d8-full-reset">Run Multi-Cycle Game Reset (360&deg;)</button>
+            <button type="button" class="btn" id="d8-pause">Pause</button>
+          </div>
+          <div class="slider-control">
+            <div class="slider-label-row">
+              <label for="d8-angle">Manual Cam Shaft Angle</label>
+              <span class="slider-readout" id="d8-angle-val">0&deg; (Index Notch)</span>
+            </div>
+            <input type="range" id="d8-angle" min="0" max="360" value="0" step="1">
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot" id="d8-dot-run" aria-hidden="true"></span>Motor 1C Index: <strong id="d8-idx-state">STOPPED IN NOTCH (0&deg;)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Switch 1A Pulses Fired: <strong id="d8-pulses">0</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Active Phase: <strong id="d8-phase">Idle at home notch</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Click <strong>Score 500 pts</strong> to run one 120&deg; cycle while switch <code>1A</code> fires five 100-point pulses (the same five-pulse cycle also powers Solar City&rsquo;s 5,000-point lane through the 1,000-point relay). Drag <strong>Manual Cam Shaft Angle</strong> to read each switch closure against the schematic timing chart (the diagram illustrates a 3-cycle reset sequence across one 360&deg; revolution).
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>4. Stepper Units: Counting Multi-Step State and Bonuses</h2>
+        <p>
+          Relays store only a single on-or-off bit. To count higher values&mdash;which ball is in play, whether Player 1 or Player 2 is shooting, or how many drop targets count toward the end-of-ball bonus&mdash;Gottlieb used rotary <strong>stepper units</strong>.
+        </p>
+        <p>
+          A stepper unit pairs a stationary Bakelite board lined with brass contact rivets (each wired to a lamp or circuit) with a spring-loaded brass <strong>wiper arm</strong> mounted on a toothed ratchet wheel. Two opposing solenoids move it:
+        </p>
+        <ul>
+          <li><strong>Step-Up coil:</strong> Each Solar City drop target hit fires this coil, pushing a hinged metal finger (a <strong>pawl</strong>) that advances the ratchet wheel by one tooth, moving the wiper to the next rivet and adding <strong>+1,000 bonus</strong> (up to 15,000 across all 15 targets).</li>
+          <li><strong>Step-Down (subtract) coil:</strong> When the ball drains into the <strong>outhole</strong> (the pocket below the flippers), the score motor steps the <strong>Bonus Unit</strong> backward one tooth at a time. Each tick triggers the 1,000-point score relay and rings the high chime bar. On the <strong>last ball</strong>, the Double Bonus relay delivers two 1,000-point pulses per step&mdash;awarding <strong>2,000 points per target</strong> (up to 30,000 points)&mdash;until the wiper reaches rivet 0, where the zero-position switch stack opens the step-down circuit and closes a companion contact signaling the machine to serve the next ball.</li>
+        </ul>
+      </div>
+
+      <!-- DIAGRAM 9: Solar City Bonus Unit -->
+      <figure class="diagram-figure stage-breakout" id="fig-stepper">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 9. Solar City Bonus Unit &amp; Last-Ball Double Bonus</span>
+          <span class="diagram-badge">Step up targets, then drain to count down</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d9-canvas" class="diagram-canvas" width="860" height="415" role="img" aria-label="Interactive Gottlieb Bonus Unit showing the Bakelite rivet board with 0 to 15K positions, brass wiper arm, toothed ratchet wheel, step-up and step-down coils, zero switch, and Solar City's Double Bonus relay."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d9-step-up">Drop Target Hit (+1,000 Bonus)</button>
+            <button type="button" class="btn" id="d9-fill-five">+5 Targets</button>
+            <button type="button" class="btn" id="d9-double" aria-pressed="false">Last Ball: 2&times; Double Bonus</button>
+            <button type="button" class="btn btn-cobalt" id="d9-drain">Ball Drains &mdash; Count Down Bonus</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Bonus Unit Position: <strong id="d9-pos">0 / 15 (0 pts)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d9-dot-zero" aria-hidden="true"></span>Zero Switch: <strong id="d9-zero">OPEN (At Home)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Awarded Score Tally: <strong id="d9-awarded">0 pts</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Step the Bonus Unit up to simulate knocking down Solar City&rsquo;s 15 drop targets, toggle <strong>Last Ball: 2&times; Double Bonus</strong>, and click <strong>Ball Drains</strong> to watch the Step-Down coil tick back to zero.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>5. Motion Detection: Tilt Pendulum and Slam Switch</h2>
+        <p>
+          Lightly nudging the cabinet to steer a ball away from the center drain is part of pinball skill; lifting or shoving the cabinet is penalized. Gottlieb EM machines separate fair nudges from heavy shoves with two opposite switches (alongside a steel ball-roll switch inside the left wall that detects lifting the front of the cabinet):
+        </p>
+        <ul>
+          <li><strong>Plumb-bob tilt pendulum (Normally Open):</strong> Mounted on the inside left cabinet wall, a weighted conical brass <strong>bob</strong> hangs through a stationary conductive <strong>tilt ring</strong>. A light tap sways the bob inside the gap. A hard shove swings it into the ring, closing the circuit to latch the <strong>Tilt Relay</strong>&mdash;cutting power to all four flippers, both pop bumpers, and scoring switches, lighting <code>TILT</code> on the backglass, and <strong>forfeiting your accumulated end-of-ball bonus</strong>. Operators tune sensitivity with a thumbscrew: sliding the wider base of the cone higher into the ring narrows the clearance.</li>
+          <li><strong>Slam switches (Normally Closed):</strong> As seen in Figure 6, weighted anti-cheat switches on the coin door, cabinet floor, underside of the playfield, and backbox bounce <em>open</em> on a violent kick, dropping the Hold Relay and ending the entire active game rather than just one ball.</li>
+        </ul>
+      </div>
+
+      <!-- DIAGRAM 10: Tilt Pendulum & Slam Switch -->
+      <figure class="diagram-figure stage-breakout" id="fig-tilt">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 10. Plumb-Bob Tilt Pendulum &amp; Coin-Door Slam Switch</span>
+          <span class="diagram-badge">Nudge cabinet &amp; adjust sensitivity</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d10-canvas" class="diagram-canvas" width="860" height="390" role="img" aria-label="Interactive physics simulation of a pinball plumb-bob tilt pendulum swinging inside a conductive ring alongside a normally closed coin-door slam switch."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn" id="d10-nudge-soft">Gentle Nudge (Save Ball)</button>
+            <button type="button" class="btn btn-primary" id="d10-nudge-hard">Hard Shove (Risk Tilt)</button>
+            <button type="button" class="btn" id="d10-slam">Kick Coin Door (Slam)</button>
+            <button type="button" class="btn btn-cobalt" id="d10-reset">Next Ball / Reset Tilt</button>
+          </div>
+          <div class="slider-control">
+            <div class="slider-label-row">
+              <label for="d10-sens">Bob Height (Tilt Sensitivity)</label>
+              <span class="slider-readout" id="d10-sens-val">Medium (Arcade Standard)</span>
+            </div>
+            <input type="range" id="d10-sens" min="15" max="90" value="52" step="1">
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" id="d10-dot-status" aria-hidden="true"></span>Machine State: <strong id="d10-status">PLAYING &mdash; Flippers &amp; Coils Live</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Ring Clearance: <strong id="d10-gap">9.8 mm</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d10-dot-angle" aria-hidden="true"></span>Pendulum Swing: <strong id="d10-angle">0.0&deg;</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Test a gentle nudge, then slide the conical bob higher to narrow the ring gap and nudge again. Note the inverse wiring: the Tilt Pendulum is <em>Normally Open</em> (closes on contact to end the ball and forfeit bonus), whereas the Slam Switch is <em>Normally Closed</em> (bounces open on impact to end the full game).
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>
+          In <strong>Part III</strong>, we follow those 25V AC pulses into the backbox and cabinet wall to inspect mechanical score reels, the three-bar chime box, the 00&ndash;90 Match unit, and the documented history of Gottlieb&rsquo;s 1977 Solar City.
+        </p>
+      </div>
+
+      <nav class="chapter-pager" aria-label="Chapter navigation">
+        <a class="pager-link" href="index.html">
+          <span class="pager-dir">&larr; Previous Chapter</span>
+          <span class="pager-title">Part I: Playfield &amp; Action</span>
+          <span class="pager-sub">Solar City layout, plunger energy, dual-wound flippers, pop bumpers &amp; drop targets</span>
+        </a>
+        <a class="pager-link pager-next" href="score-and-legacy.html">
+          <span class="pager-dir">Next Chapter &rarr;</span>
+          <span class="pager-title">Part III: Score, Sound &amp; 1977 Legacy</span>
+          <span class="pager-sub">Score reels, 3-bar chime box, 00&ndash;90 Match, Krynski, Morison &amp; the El Dorado family tree</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>How Electromechanical Pinball Works</strong> &middot; Reference: Gottlieb <em>Solar City</em> (1977)
+      </div>
+      <div>
+        Part II: The Brain Without a Chip &middot; <a href="score-and-legacy.html#sources">Sources &amp; Credits</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

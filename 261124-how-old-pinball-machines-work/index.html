@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const s = localStorage.getItem('color-scheme');
+      if (s === 'light' || s === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = s;
+      }
+    } catch {}
+  </script>
+  <title>Part I: Playfield &amp; Action | How Electromechanical Pinball Works</title>
+  <meta name="description" content="An interactive mechanical and electrical guide to 1970s electromechanical pinball machines, using D. Gottlieb &amp; Co.'s 1977 Solar City as a reference.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/core.js"></script>
+  <script type="module" src="js/part1-playfield.js"></script>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <a href="#main-heading" class="skip-link visually-hidden">Skip to article content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">77</span>
+        <span>EM Pinball: Solar City</span>
+      </a>
+
+      <div class="header-actions">
+        <nav class="site-nav" aria-label="Primary">
+          <button
+            class="menu-button"
+            type="button"
+            popovertarget="site-menu"
+            popovertargetaction="toggle"
+            aria-controls="site-menu"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M2 4h12M2 8h12M2 12h12"/>
+            </svg>
+            <span>Chapters</span>
+          </button>
+
+          <ul id="site-menu" class="site-menu" popover="auto">
+            <li><a href="index.html" aria-current="page"><span class="nav-part-num">I.</span> Playfield &amp; Action</a></li>
+            <li><a href="logic.html"><span class="nav-part-num">II.</span> The Brain Without a Chip</a></li>
+            <li><a href="score-and-legacy.html"><span class="nav-part-num">III.</span> Score, Sound &amp; 1977 Legacy</a></li>
+          </ul>
+        </nav>
+
+        <button class="theme-toggle" type="button" data-theme-toggle>
+          <span class="theme-option theme-option-light">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Light</span>
+            <span class="sr-only">Switch to light mode</span>
+          </span>
+          <span class="theme-option theme-option-dark">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="theme-label" aria-hidden="true">Dark</span>
+            <span class="sr-only">Switch to dark mode</span>
+          </span>
+        </button>
+
+        <button class="audio-toggle" type="button" data-audio-toggle aria-pressed="false">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <span data-audio-label>Sound: Off</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="article-shell">
+    <article>
+      <header class="article-hero">
+        <p class="chapter-kicker">Part I of III &middot; Gravity, Steel &amp; Coils</p>
+        <h1 id="main-heading" tabindex="-1">How Electromechanical Pinball Works</h1>
+        <p class="hero-lead">
+          In February 1977, D. Gottlieb &amp; Co. released <strong>Solar City</strong> (Model #393), a two-player electromechanical pinball machine with no microprocessors, software, or sound chips. It tracked two players, doubled end-of-ball bonuses, fired four flippers, reset fifteen drop targets, and rang a three-bar aluminum chime box using copper electromagnets, springy metal switches, rotating cams, and 25V alternating current.
+        </p>
+        <div class="article-meta">
+          <span>Reference: Gottlieb Solar City (Model #393, Feb 1977)</span>
+          <span>Designer: Ed Krynski &middot; Art: Gordon Morison</span>
+          <span>13 Interactive Figures across 3 Chapters</span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <p>
+          Under the playfield of a 1970s electromechanical (EM) machine, cloth-braided wiring harnesses link steel-framed <strong>relays</strong> (electromagnetic switches), <strong>solenoids</strong> (hollow copper coils that pull a steel rod inward when powered), ratcheting counters, and a rotating cam motor. When the steel pinball bends a springy nickel-silver <strong>leaf switch</strong>, the contacts touch&mdash;<em>closing</em> the circuit so power flows&mdash;and trigger coils in sequence. (In electrical switches, <strong>closed</strong> means contacts touch and power flows; <strong>open</strong> means separated and off.)
+        </p>
+        <p>
+          Click or drag any figure below to operate each mechanism directly, and toggle <strong>Sound: On</strong> in the top bar for synthesized relay clicks, solenoid clacks, and chimes.
+        </p>
+
+        <h2>1. Cabinet Zones and Solar City&rsquo;s Layout</h2>
+        <p>
+          Every EM pinball machine divides its hardware across three zones: the sloped <strong>playfield</strong> (targets, rollovers, slingshots, pop bumpers, and flippers, with their switches and coils underneath), the <strong>lower cabinet</strong> (power transformer, relays, score motor, Bonus Unit, tilt pendulum, and chime box), and the upright <strong>backbox</strong> behind the illuminated glass (mechanical score reels, Player Unit, and 00&ndash;90 Match stepper).
+        </p>
+        <p>
+          Designer Ed Krynski reused the layout from his 1975 <em>El Dorado</em> and 1976 <em>Target Alpha</em> (<a href="https://www.ipdb.org/machine.cgi?id=2237">IPDB #2237</a>): <strong>15 drop targets</strong> (a 10-target upper bank and a 5-target right bank), <strong>2 pop bumpers</strong>, <strong>2 slingshots</strong> (kicking rubber triangles above the lower flippers), and <strong>4 flippers</strong> (two 3-inch lower flippers and two 2-inch upper flippers).
+        </p>
+      </div>
+
+      <!-- DIAGRAM 1: Solar City Cabinet & Playfield Explorer -->
+      <figure class="diagram-figure stage-breakout" id="fig-anatomy">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 1. Gottlieb Solar City (1977) &mdash; Playfield &amp; Cabinet Architecture</span>
+          <span class="diagram-badge">Click parts to inspect</span>
+        </div>
+        <div class="diagram-canvas-wrap theme-cabinet">
+          <canvas id="d1-canvas" class="diagram-canvas" width="860" height="480" role="img" aria-label="Interactive top-down playfield and side cabinet cutaway of the 1977 Gottlieb Solar City pinball machine showing its 15 drop targets, 4 flippers, 2 pop bumpers, 2 slingshots, score reels, score motor, and transformer."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="btn-segmented" role="group" aria-label="Anatomy view mode">
+            <button type="button" class="btn" id="d1-view-playfield" aria-pressed="true">Playfield Layout (Top-Down)</button>
+            <button type="button" class="btn" id="d1-view-cabinet" aria-pressed="false">Cabinet Cutaway (Side View)</button>
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d1-demo-shot">Trace Diagonal Shot</button>
+            <button type="button" class="btn" id="d1-reset-targets">Reset Playfield</button>
+          </div>
+        </div>
+        <div class="inspector-panel" aria-live="polite">
+          <span class="inspector-name" id="d1-info-title">Select a Component to Inspect</span>
+          <span class="inspector-desc" id="d1-info-desc">Click any highlighted part on the playfield or switch to the Cabinet Cutaway to inspect how Solar City&rsquo;s hardware fits together. Use &ldquo;Trace Diagonal Shot&rdquo; to trace the lower-left flipper shot across the deck to the top right-side drop target.</span>
+        </div>
+        <figcaption class="diagram-caption">
+          Toggle between the top-down playfield and the side cabinet cutaway to see how playfield switches connect to the power supply, relays, and score reels.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <div class="callout callout-solar">
+          <p class="callout-title">Solar City Rules Note &middot; Model #393 (February 1977)</p>
+          <p>
+            Unlike sibling table <em>El Dorado</em> (1975), where clearing a bank pops the targets back up mid-ball, Solar City&rsquo;s drop targets stay down until the ball drains. Every drop target scores a flat <strong>300 points</strong> (even when adjacent feature lights are lit) and adds <strong>1,000 points</strong> to your end-of-ball bonus, which automatically doubles on the last ball.
+          </p>
+        </div>
+
+        <h2>2. Gravity, Playfield Pitch, and the Spring Plunger</h2>
+        <p>
+          The wooden playfield tilts toward the player so gravity pulls the 1<sup>1</sup>&frasl;<sub>16</sub>-inch (27&nbsp;mm), 2.8-ounce (80&nbsp;g) steel ball back toward the flippers. Most 1970s EM tables ran at a <strong>4&deg; to 5&deg;</strong> pitch to match their slower ball speed, whereas modern computer-controlled solid-state machines typically run at <strong>6.5&deg; to 7&deg;</strong>.
+        </p>
+        <p>
+          To launch the ball up the shooter lane and around the curved upper guide (the top arch), the player pulls back the spring-loaded <strong>shooter rod (plunger)</strong>. Compressing the barrel spring by distance <em>x</em> stores elastic energy <code>E = &frac12;kx&sup2;</code>, where <em>k</em> is the spring&rsquo;s stiffness. Because stored energy grows with the square of pull distance, pulling twice as far delivers four times the launch energy&mdash;so small pull adjustments separate a soft drop into the top <strong>rollover lanes</strong> (slots with wire switches the ball rolls over) from a hard shot that rebounds straight out. In Solar City, clearing targets lights the top lane for <strong>5,000 points</strong> during play.
+        </p>
+      </div>
+
+      <!-- DIAGRAM 2: Plunger, Spring Energy & Slope -->
+      <figure class="diagram-figure stage-breakout" id="fig-plunger">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 2. Spring Plunger Energy &amp; Playfield Pitch Physics</span>
+          <span class="diagram-badge">Drag plunger or use slider</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d2-canvas" class="diagram-canvas interactive-drag" width="860" height="350" role="img" aria-label="Interactive physics cutaway of a spring-loaded pinball shooter rod launching a steel ball up an inclined shooter lane toward top rollover lanes."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="slider-control">
+            <div class="slider-label-row">
+              <label for="d2-pull">Plunger Pull Compression</label>
+              <span class="slider-readout" id="d2-pull-val">62%</span>
+            </div>
+            <input type="range" id="d2-pull" min="15" max="100" value="62" step="1">
+          </div>
+          <div class="slider-control">
+            <div class="slider-label-row">
+              <label for="d2-pitch">Playfield Slope Angle</label>
+              <span class="slider-readout" id="d2-pitch-val">6.5&deg;</span>
+            </div>
+            <input type="range" id="d2-pitch" min="3.0" max="8.5" value="6.5" step="0.5">
+          </div>
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d2-launch">Release Plunger</button>
+            <button type="button" class="btn" id="d2-reset">Reload Ball</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-active" aria-hidden="true"></span>Stored Energy: <strong id="d2-energy">0.38 J</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Slope Pull (g&middot;sin&theta;): <strong id="d2-grav">1.11 m/s&sup2;</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Outcome: <strong id="d2-result">Ready in shooter lane &mdash; test soft vs. hard pulls.</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Pull the brass shooter rod on the canvas (or adjust compression) and release. The slope defaults to a steep 6.5&deg; modern pitch; lower it to 4.5&deg;&ndash;5.0&deg; to compare a classic 1970s EM angle and watch downhill gravity pull (<em>g&middot;sin&theta;</em>) drop. (A rolling steel sphere accelerates slightly slower than a sliding block because rotational inertia absorbs part of the force.)
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>3. Dual-Wound Flippers and the End-of-Stroke (EOS) Switch</h2>
+        <p>
+          Gottlieb introduced player-controlled electromechanical flippers in October 1947 on <em>Humpty Dumpty</em> (designed by Harry Mabs), which mounted six short flippers along the playfield sides. By 1977, Gottlieb flippers used a dual-wound solenoid coil&mdash;such as the Gottlieb <code>A-5141</code>&mdash;to solve a heat problem without electronic transistors.
+        </p>
+        <p>
+          Batting a 2.8-ounce steel ball back up the playfield takes a brief surge of electrical current (roughly <strong>8 to 10 amps</strong> at 25V AC). Players also routinely trap the ball by holding a flipper paddle (called a <strong>bat</strong>) up for 10 to 15 seconds while aiming. Keeping 10 amps flowing through a copper coil for that long melts the insulating enamel coating on its wire and burns out the coil.
+        </p>
+        <p>
+          Gottlieb prevented burnout by winding two copper coils onto one spool in series (end to end) and pairing them with a normally closed tungsten <strong>End-of-Stroke (EOS) switch</strong> beside the flipper crank:
+        </p>
+        <ul>
+          <li><strong>Power winding (thick, low-resistance wire, ~1&ndash;1.7&nbsp;&Omega;):</strong> At rest, the closed EOS switch bypasses the thin hold winding. Pressing the cabinet button sends 25V AC straight through the power winding, pulling the solenoid&rsquo;s steel rod inward in about 25 milliseconds to snap the flipper up.</li>
+          <li><strong>Hold winding (thin, higher-resistance wire, ~6&ndash;8&nbsp;&Omega;):</strong> At the top of the swing, a small hinged lever (a <strong>pawl</strong>) on the flipper crank pushes the EOS switch <strong>open</strong>.</li>
+          <li><strong>Low-current hold state:</strong> With the bypass open, current must flow through both windings in series, and the steel rod now seated inside the coil raises AC inductive impedance (opposition to alternating current). Current drops from ~10&nbsp;A to under 1&nbsp;A&mdash;enough magnetic pull to hold the bat upright safely without overheating.</li>
+        </ul>
+      </div>
+
+      <!-- DIAGRAM 3: Dual-Wound Flipper & EOS Switch -->
+      <figure class="diagram-figure stage-breakout" id="fig-flipper">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 3. Dual-Wound Flipper Solenoid &amp; End-of-Stroke (EOS) Switch</span>
+          <span class="diagram-badge">Press &amp; hold button or Space</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d3-canvas" class="diagram-canvas" width="860" height="420" role="img" aria-label="Interactive electrical and mechanical cutaway of a Gottlieb dual-wound pinball flipper coil showing the power winding, hold winding, steel solenoid rod, crank linkage, flipper bat, and End-of-Stroke switch."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d3-hold-btn">Press &amp; Hold Flipper Button</button>
+            <button type="button" class="btn" id="d3-latch-btn" aria-pressed="false">Lock Button Held</button>
+            <button type="button" class="btn" id="d3-fault-btn" aria-pressed="false">Simulate Welded EOS (Fault)</button>
+          </div>
+          <div class="slider-control">
+            <div class="slider-label-row">
+              <label for="d3-speed">Playback Speed</label>
+              <span class="slider-readout" id="d3-speed-val">Slow-Mo (0.25&times;)</span>
+            </div>
+            <input type="range" id="d3-speed" min="1" max="4" value="2" step="1">
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot" id="d3-dot-eos" aria-hidden="true"></span>EOS Switch: <strong id="d3-state-eos">CLOSED (Hold Bypassed)</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d3-dot-curr" aria-hidden="true"></span>Coil Current: <strong id="d3-state-curr">0.0 A</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d3-dot-temp" aria-hidden="true"></span>Coil Temp: <strong id="d3-state-temp">28&deg;C / 82&deg;F (Safe)</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Hold the flipper button (or lock it held) in slow motion to watch 25V AC surge through the red Power Winding until the crank pawl opens the EOS switch and shifts current into the blue Hold Winding. Toggle <strong>Simulate Welded EOS</strong> to see what happens when electrical arcing fuses the EOS contacts shut and overheats the coil.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <details class="tech-note">
+          <summary>How two cabinet buttons control Solar City&rsquo;s four flippers</summary>
+          <p>
+            Solar City mounts <strong>four flippers</strong> (two 3-inch lower flippers and two 2-inch upper flippers) but uses only one button on each side of the cabinet. Behind each button sits a <strong>dual-stack flipper switch</strong> with two separate contact pairs fed from the same 25V supply lug&mdash;one wired to the lower coil and one to the upper coil. When adjusted for <em>staged flipping</em>, a half-press activates the lower flipper first and a full press raises both, letting players trap a ball on the lower bat while swinging the upper bat. Each of the four coils keeps its own under-playfield EOS switch.
+          </p>
+        </details>
+
+        <h2>4. The Pop Bumper</h2>
+        <p>
+          Active solenoid-driven bumpers carried different brand names in the 1970s: Gottlieb called them <strong>pop bumpers</strong>, Bally called them &ldquo;thumper bumpers,&rdquo; and Williams called them &ldquo;jet bumpers.&rdquo; The assembly senses a ball from any 360-degree angle and kicks it away in about 40 milliseconds.
+        </p>
+        <p>
+          Around the bumper&rsquo;s base sits a flared plastic <strong>skirt</strong> whose vertical stem passes through the playfield into a shallow <strong>spoon switch</strong> underneath. Touching any side of the skirt tilts the stem against the spoon, closing a low-current leaf switch. On 1970s Gottlieb EM tables, that switch pulls in a dedicated <strong>pop bumper relay</strong> (covered in <a href="logic.html">Part II</a>), which scores 100 points and switches 25V AC to the heavy vertical solenoid below the deck&mdash;holding itself on briefly until the bumper completes its stroke so even a glancing hit delivers a full kick.
+        </p>
+        <p>
+          When the vertical solenoid fires, it yanks a rigid metal-and-fiber <strong>yoke</strong> (a U-shaped bracket insulated with fiber board) straight <em>downward</em>. That pulls the beveled steel kicker ring down against the upper curve of the ball, wedging it forcefully sideways across the playfield while a steady 6.3V bulb illuminates the translucent bumper cap from above.
+        </p>
+      </div>
+
+      <!-- DIAGRAM 4: Pop Bumper Cutaway -->
+      <figure class="diagram-figure stage-breakout" id="fig-bumper">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 4. Pop Bumper &mdash; Above &amp; Beneath the Playfield</span>
+          <span class="diagram-badge">Click canvas or fire ball</span>
+        </div>
+        <div class="diagram-canvas-wrap theme-cabinet">
+          <canvas id="d4-canvas" class="diagram-canvas" width="860" height="390" role="img" aria-label="Interactive vertical cross-section of a Gottlieb electromechanical pop bumper showing the cap lamp, tilting plastic skirt, metal kicker ring, under-playfield spoon switch, solenoid coil, and fiber yoke."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d4-send-left">Roll Ball from Left</button>
+            <button type="button" class="btn btn-cobalt" id="d4-send-right">Roll Ball from Right</button>
+            <button type="button" class="btn" id="d4-slowmo" aria-pressed="true">Slow-Mo (0.15&times;)</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot" id="d4-dot-phase" aria-hidden="true"></span>Phase: <strong id="d4-phase-text">Idle &mdash; Waiting for ball contact</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d4-dot-sw" aria-hidden="true"></span>Spoon Switch: <strong id="d4-sw-text">OPEN</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot" id="d4-dot-pts" aria-hidden="true"></span>Pop Bumper Hits: <strong id="d4-hits">0 (+0 pts)</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Watch the sequence in slow motion: the ball tilts the skirt, its lower stem closes the spoon switch, and the 25V solenoid yanks the beveled steel ring downward to wedge the ball sideways while scoring 100 points. (The cutaway simplifies the wiring by omitting the cabinet pop bumper relay between the spoon switch and coil.)
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <h2>5. Drop Target Banks</h2>
+        <p>
+          Ed Krynski popularized large mechanical <strong>drop target</strong> banks on Gottlieb&rsquo;s <em>2001</em> and <em>Galaxie</em> (1971) and reused the idea across the 1975&ndash;1977 <em>El Dorado</em>, <em>Target Alpha</em>, and <em>Solar City</em> series. Solar City mounts <strong>15</strong> molded plastic drop targets: ten across the upper deck and five angled down the right flank.
+        </p>
+        <p>
+          Each target works as both a scoring trigger and a physical memory bit:
+        </p>
+        <ol>
+          <li><strong>Armed:</strong> A molded ledge on the target blade hooks onto a thin stamped-steel <strong>retaining shelf</strong> on the bank frame, held under tension by a stretched pull-down spring.</li>
+          <li><strong>Dropped:</strong> A pinball impact nudges the blade back roughly 2&nbsp;mm, slipping it off the retaining shelf so the spring pulls the target flush with the playfield.</li>
+          <li><strong>Scored and stored:</strong> Dropping the blade triggers a brief scoring impulse (registering <strong>300 points</strong> and stepping the cabinet&rsquo;s <strong>Bonus Unit</strong> forward by <strong>1,000 points</strong>) without holding the scoring coil locked on. Meanwhile, its resting down-position leaf switch stays closed to track target-bank progress&mdash;so the sunken plastic blade itself remembers the hit without needing a separate relay.</li>
+          <li><strong>Reset:</strong> When the ball drains and the next ball starts, a heavy <strong>reset solenoid</strong> swings a U-shaped steel <strong>reset bar</strong> upward under the bank, pushing every dropped target back up until its ledge clicks onto the retaining shelf.</li>
+        </ol>
+      </div>
+
+      <!-- DIAGRAM 5: Drop Target Bank & Reset Mechanism -->
+      <figure class="diagram-figure stage-breakout" id="fig-droptargets">
+        <div class="diagram-header">
+          <span class="diagram-title">Figure 5. Solar City 5-Target Drop Bank &amp; Side Latch Cutaway</span>
+          <span class="diagram-badge">Click targets to knock down</span>
+        </div>
+        <div class="diagram-canvas-wrap">
+          <canvas id="d5-canvas" class="diagram-canvas" width="860" height="410" role="img" aria-label="Interactive dual diagram showing five Solar City drop targets on the left and a mechanical side cross-section on the right illustrating the retaining shelf, pull-down spring, behind-bank leaf switch, and U-shaped solenoid reset bar."></canvas>
+        </div>
+        <div class="diagram-controls">
+          <div class="control-group">
+            <button type="button" class="btn btn-primary" id="d5-shoot">Shoot Next Target</button>
+            <button type="button" class="btn btn-cobalt" id="d5-reset-bank">End of Ball &mdash; Fire Reset Solenoid</button>
+          </div>
+          <div class="control-group" role="group" aria-label="Individual target triggers">
+            <button type="button" class="btn" data-drop-target="0">#1</button>
+            <button type="button" class="btn" data-drop-target="1">#2</button>
+            <button type="button" class="btn" data-drop-target="2">#3</button>
+            <button type="button" class="btn" data-drop-target="3">#4</button>
+            <button type="button" class="btn" data-drop-target="4">#5</button>
+          </div>
+        </div>
+        <div class="diagram-telemetry" aria-live="polite">
+          <span class="telemetry-item"><span class="telemetry-dot is-active" aria-hidden="true"></span>Targets Down: <strong id="d5-down-count">0 / 5</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-ok" aria-hidden="true"></span>Immediate Score: <strong id="d5-score">0 pts</strong></span>
+          <span class="telemetry-item"><span class="telemetry-dot is-lamp" aria-hidden="true"></span>Bonus Added: <strong id="d5-bonus">+0 pts</strong></span>
+        </div>
+        <figcaption class="diagram-caption">
+          Click any target on the canvas (or buttons #1&ndash;#5) to drop it off the retaining shelf while the cross-section mirrors the spring, leaf switch, and latch. Fire the <strong>Reset Solenoid</strong> to lift all dropped targets back onto the shelf at once.
+        </figcaption>
+      </figure>
+
+      <div class="prose">
+        <p>
+          Playfield switches sense ball contact while coils kick the ball back. In <strong>Part II</strong>, we move down to the cabinet floor to see how the transformer, relays, 1/3-turn score motor, Bonus Unit, and tilt pendulum run the game&rsquo;s rules without a microprocessor.
+        </p>
+      </div>
+
+      <nav class="chapter-pager" aria-label="Chapter navigation">
+        <div aria-hidden="true"></div>
+        <a class="pager-link pager-next" href="logic.html">
+          <span class="pager-dir">Next Chapter &rarr;</span>
+          <span class="pager-title">Part II: The Brain Without a Chip</span>
+          <span class="pager-sub">25V AC bus, relays, the 1/3-turn score motor, Bonus Unit &amp; tilt physics</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>How Electromechanical Pinball Works</strong> &middot; Reference: Gottlieb <em>Solar City</em> (1977)
+      </div>
+      <div>
+        Part I: Playfield &amp; Action &middot; <a href="score-and-legacy.html#sources">Sources &amp; Credits</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
