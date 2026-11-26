@@ -10,6 +10,7 @@
     />
     <title>Thanksgiving Turkey Slices Guide</title>
     <link rel="icon" href="assets/art/turkey.webp" />
+    <script src="theme.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="app.js"></script>
   </head>
@@ -118,10 +119,16 @@
         <div class="ideas" id="ideas"></div>
       </section>
     </main>
-    <footer>
+    <footer id="footer">
       <div class="wrap">
         <span>Created by Matt Makai with OpenAI's Codex with Astra 6.2, Google Antigravity with Neon</span>
-        <button id="credits">Credits</button>
+        <div class="footer-actions">
+          <label class="theme-control">
+            <input type="checkbox" id="dark-mode" role="switch" />
+            Dark mode
+          </label>
+          <button id="credits">Credits</button>
+        </div>
       </div>
     </footer>
     <dialog id="dialog" aria-labelledby="dialog-title">

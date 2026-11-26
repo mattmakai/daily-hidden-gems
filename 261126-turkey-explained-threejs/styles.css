@@ -15,6 +15,7 @@
   font-display: swap;
 }
 :root {
+  color-scheme: light;
   --wine: #511f16;
   --berry: #9c2f2f;
   --orange: #b6562a;
@@ -535,12 +536,57 @@ footer {
 }
 footer .wrap {
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 14px;
   font-size: 0.8rem;
 }
-#credits {
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   margin-left: auto;
+}
+.theme-control {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  gap: 6px;
+  cursor: pointer;
+}
+.theme-control input {
+  appearance: none;
+  display: grid;
+  align-items: center;
+  width: 26px;
+  height: 16px;
+  margin: 0;
+  padding: 2px;
+  border: 1px solid currentColor;
+  border-radius: 99px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.theme-control input::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.theme-control input:checked {
+  background: var(--wine);
+  color: var(--paper);
+  border-color: var(--wine);
+}
+.theme-control input:checked::after {
+  justify-self: end;
+}
+.theme-control input:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+#credits {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -874,4 +920,81 @@ dialog img {
 }
 .fallback .board-caption {
   display: none;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #211c19;
+  --ink: #f2e7d8;
+  --wine: #f3d9b8;
+  --berry: #eea59b;
+  --orange: #e6a16e;
+  --brown: #dcbf9b;
+  --muted: #cab9a7;
+  --line: #57493d;
+  --surface: #2b2520;
+  --raised: #383029;
+}
+[data-theme="dark"] :is(.lede, .board-caption, .progress-label, .detail p, dialog p, dialog li, .view-hint, .view-label) {
+  color: var(--muted);
+}
+[data-theme="dark"] :is(.model-column, .cut-panel, .idea, .board-caption, .progress-area, .restore, .board-action, .zoom) {
+  background: var(--surface);
+  border-color: var(--line);
+}
+[data-theme="dark"] .stage {
+  background: radial-gradient(ellipse at 49% 42%, #574536, #3d322a 55%, #2a231e);
+}
+[data-theme="dark"] :is(.board-action, .zoom) {
+  color: var(--ink);
+}
+[data-theme="dark"] :is(.board-action:hover, .zoom button:hover, .cut-row:hover, .idea:hover, .restore:hover) {
+  background: var(--raised);
+}
+[data-theme="dark"] :is(.zoom button + button, .cut-row, dialog) {
+  border-color: var(--line);
+}
+[data-theme="dark"] .cut-row :is(.cut-number, .chev) {
+  color: var(--brown);
+}
+[data-theme="dark"] .cut-row.carved .cut-number {
+  color: #b1c69c;
+}
+[data-theme="dark"] #progress-track i:not(.done) {
+  background: var(--line);
+}
+[data-theme="dark"] .leader {
+  background: #ffe4c3;
+}
+[data-theme="dark"] .pin {
+  background: var(--surface);
+  border-color: #aa8c70;
+}
+[data-theme="dark"] .pin b {
+  color: var(--paper);
+}
+[data-theme="dark"] .pin:is(:hover, :focus-visible) {
+  background: var(--raised);
+  border-color: var(--wine);
+}
+[data-theme="dark"] .turkey-engraving {
+  filter: grayscale(1) invert(1) sepia(.45);
+  mix-blend-mode: screen;
+}
+[data-theme="dark"] :is(.cut-row, .idea, .detail-head, dialog) img {
+  mix-blend-mode: normal;
+  background: #f3e7d3;
+  border-radius: 5px;
+  filter: sepia(.12) brightness(.9);
+}
+[data-theme="dark"] .skip:focus {
+  background: var(--surface);
+}
+@media (forced-colors: active) {
+  .theme-control input {
+    appearance: auto;
+  }
+  .theme-control input::after {
+    content: none;
+  }
 }
