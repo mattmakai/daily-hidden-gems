@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf7ef" />
+    <meta
+      name="description"
+      content="Pull apart a 3D roast turkey to compare the breast, thigh, drumstick, wing, and carcass, with serving tips for dinner and leftovers."
+    />
+    <title>Thanksgiving Turkey Slices Guide</title>
+    <link rel="icon" href="assets/art/turkey.webp" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#board">Skip to carving board</a>
+    <main id="top" class="wrap">
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <h1 id="title">Thanksgiving Turkey <em>Slices Guide</em></h1>
+          <p class="lede">
+            Pull the 3D bird apart, or pick from the cut index, to compare white
+            meat, dark meat, and stock bones for dinner and leftovers.
+          </p>
+        </div>
+        <img
+          class="turkey-engraving"
+          src="assets/art/turkey.webp"
+          alt=""
+          width="300"
+          height="300"
+        />
+      </section>
+      <section
+        class="workbench"
+        id="board"
+        aria-label="Interactive turkey carving board"
+      >
+        <div class="model-column">
+          <div
+            id="stage"
+            class="stage"
+            aria-label="3D roast turkey on a platter"
+          >
+            <div class="scene" id="scene">
+              <img
+                class="poster"
+                src="assets/turkey-poster.webp"
+                alt="Golden roast turkey garnished with cranberries, oranges, and herbs on an oval platter."
+              />
+            </div>
+            <div class="stage-ui">
+              <span class="view-label"
+                ><span data-icon="cube"></span>3D platter</span
+              >
+              <div class="board-actions">
+                <button id="help" class="board-action" aria-label="How it works" title="How it works">
+                  <span data-icon="help"></span>
+                </button>
+                <button id="reset" class="board-action">
+                  <span data-icon="reset"></span>Reset bird
+                </button>
+              </div>
+            </div>
+            <div id="markers"></div>
+            <div class="stage-message" id="loading" role="status">
+              Loading 3D turkey…
+            </div>
+            <div class="bottom-ui">
+              <span class="view-hint"
+                ><span data-icon="orbit"></span>Drag outside the bird to
+                turn</span
+              >
+              <div class="zoom">
+                <button id="zoom-out" aria-label="Zoom out" title="Zoom out">
+                  <span data-icon="minus"></span></button
+                ><button id="zoom-in" aria-label="Zoom in" title="Zoom in">
+                  <span data-icon="plus"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="board-caption">
+            <span class="caption-icon" data-icon="hand"></span
+            ><span
+              >Pull or tap a piece for notes. Remove all four meat cuts to lift
+              the carcass.</span
+            >
+          </div>
+        </div>
+        <aside
+          class="cut-panel"
+          aria-label="Turkey cut index and serving notes"
+        >
+          <div id="index-view">
+            <div class="panel-heading">
+              <p class="overline">
+                <span data-icon="book"></span>Tasting &amp; serving
+              </p>
+              <h2>Cut index</h2>
+            </div>
+            <div class="cut-list" id="cuts"></div>
+          </div>
+          <div id="detail-view" hidden></div>
+          <div class="progress-area">
+            <div class="progress-label">
+              <span>Carved so far</span
+              ><span id="progress-count">0 of 5 cuts</span>
+            </div>
+            <div id="progress-track" aria-hidden="true"></div>
+          </div>
+        </aside>
+      </section>
+      <section class="serving" id="serving" aria-labelledby="serving-title">
+        <p class="overline"><span class="short-rule"></span>Serving guide</p>
+        <h2 id="serving-title">At the table, and after</h2>
+        <div class="ideas" id="ideas"></div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <span>Created by Matt Makai with OpenAI's Codex with Astra 6.2, Google Antigravity with Neon</span>
+        <button id="credits">Credits</button>
+      </div>
+    </footer>
+    <dialog id="dialog" aria-labelledby="dialog-title">
+      <button id="close-dialog" aria-label="Close dialog">
+        <span data-icon="close"></span>
+      </button>
+      <div id="dialog-copy"></div>
+    </dialog>
+    <div class="sr-only" id="announcer" role="status" aria-live="polite"></div>
+    <noscript
+      >Enable JavaScript to interact with the 3D turkey and read the cut and
+      serving notes.</noscript
+    >
+  </body>
+</html>
